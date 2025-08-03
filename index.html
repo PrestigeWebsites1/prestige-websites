@@ -456,6 +456,20 @@
             margin-bottom: 10px;
             font-family: 'Poppins', sans-serif;
         }
+
+        /* Styles for stars in stat-number */
+        .stat-number.stars-container {
+            font-size: 2.5rem; /* Adjust font size for stars to fit */
+            color: #FFD700; /* Gold color for stars */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px; /* Space between stars */
+        }
+
+        .stat-number.stars-container .fa-star {
+            transition: color 0.3s ease-in-out; /* Smooth transition for star fill */
+        }
         
         .stat-text {
             font-size: 1.1rem;
@@ -1141,7 +1155,7 @@
                 <div class="stat-text">Websites Launched</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" data-target="5" data-suffix="/5">0</div>
+                <div class="stat-number stars-container" data-rating="5" id="client-rating-stars"></div>
                 <div class="stat-text">Client Rating</div>
             </div>
             <div class="stat-item">
@@ -1403,6 +1417,28 @@
         window.addEventListener('resize', resizeCanvas);
 
 
+        // Function to animate filling of stars
+        function animateStars(element, rating) {
+            element.innerHTML = ''; // Clear existing content
+            const stars = [];
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('i');
+                star.classList.add('far', 'fa-star'); // Start with empty stars
+                stars.push(star);
+                element.appendChild(star);
+            }
+
+            // Animate filling stars
+            for (let i = 0; i < rating; i++) {
+                setTimeout(() => {
+                    if (stars[i]) { // Check if star exists before modifying
+                        stars[i].classList.remove('far');
+                        stars[i].classList.add('fas'); // Fill the star
+                    }
+                }, i * 200); // Staggered delay for each star
+            }
+        }
+
         // Number counting animation for stats (sequential animation)
         const statItems = document.querySelectorAll('.stat-item');
 
@@ -1411,7 +1447,10 @@
                 const statNumbers = Array.from(entry.target.parentNode.children).map(item => item.querySelector('.stat-number'));
                 
                 statNumbers.forEach((statNumber, index) => {
-                    setTimeout(() => {
+                    if (statNumber.id === 'client-rating-stars') {
+                        const targetRating = parseInt(statNumber.dataset.rating);
+                        animateStars(statNumber, targetRating);
+                    } else {
                         const target = parseFloat(statNumber.dataset.target);
                         const suffix = statNumber.dataset.suffix || '';
                         const isDecimal = target % 1 !== 0;
@@ -1438,8 +1477,9 @@
                                 }
                             }
                         };
-                        updateCounter();
-                    }, index * 500); // 500ms delay between each counter
+                        // Add a small delay for the number counters too, consistent with star animation
+                        setTimeout(updateCounter, index * 500); // 500ms delay between each counter
+                    }
                 });
                 observer.unobserve(entry.target); // Stop observing once animated
             }
@@ -1543,7 +1583,7 @@
             },
             {
                 name: "Charles Rodriguez",
-                rating: 5,
+                rating: 4,
                 comment: "Excellent SEO work. We've seen a significant increase in organic traffic since Prestige Websites optimized our site."
             },
             {
@@ -1558,7 +1598,7 @@
             },
             {
                 name: "Helen Fernandez",
-                rating: 5,
+                rating: 4,
                 comment: "I am very happy with the final result. The site is fast and looks great on all devices. Small adjustments, but overall excellent."
             },
             {
