@@ -248,6 +248,7 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Sutil brillo blanco añadido */
         }
         
+        /* Estilos para el efecto de máquina de escribir en escritorio */
         .typewriter-container {
             display: inline-block; /* Para contener el efecto de máquina de escribir */
             overflow: hidden; /* Ocultar el texto desbordante */
@@ -255,6 +256,7 @@
             margin: 0 auto 40px; /* Margen inferior añadido para separar del botón */
             font-size: 1.3rem; /* Coincidir con el tamaño de fuente del párrafo */
             color: white; /* Asegurar que el texto sea visible */
+            text-align: center;
         }
 
         .typewriter-text {
@@ -964,10 +966,6 @@
                 font-size: 3.2rem;
             }
             
-            .home-content p {
-                font-size: 1.1rem;
-            }
-            
             .section-title {
                 font-size: 2.5rem;
             }
@@ -999,35 +997,81 @@
                 padding: 20px 30px;
             }
             
+            /* Mejoras para la barra lateral de navegación en móvil */
             .nav-links {
                 position: fixed;
                 top: 0;
-                left: -100%;
-                width: 80%;
+                /* Cambiado para que el menú ocupe todo el ancho de la pantalla */
+                left: -100vw; /* Inicia fuera de la vista */
+                width: 100vw; /* Ocupa todo el ancho de la ventana */
                 height: 100vh;
-                background: white;
+                background: linear-gradient(135deg, var(--primary), var(--primary-dark)); /* Gradiente atractivo */
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 gap: 40px;
                 transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-                box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+                z-index: 999; /* Asegura que esté por encima de todo */
+                padding: 20px; /* Espaciado interno */
+                backdrop-filter: blur(8px); /* Efecto de desenfoque */
             }
             
             .nav-links.active {
-                left: 0;
+                left: 0; /* Desliza el menú a la vista */
+            }
+
+            .nav-links a {
+                color: white; /* Color de texto blanco para contraste */
+                font-size: 2rem; /* Tamaño de fuente más grande */
+                font-weight: 700; /* Más negrita */
+                padding: 15px 0; /* Mayor padding para facilitar el toque */
+                opacity: 0; /* Inicialmente oculto para animación */
+                transform: translateY(20px); /* Desplazado para animación */
+                transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Transición para los enlaces */
+            }
+
+            /* Animación escalonada para los enlaces cuando el menú está activo */
+            .nav-links.active a:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+            .nav-links.active a:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+            .nav-links.active a:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+            .nav-links.active a:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+            .nav-links.active a:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+
+            .nav-links a::after {
+                background: var(--accent); /* Color de acento para el subrayado */
             }
             
+            /* Mejoras para el icono de hamburguesa */
             .hamburger {
                 display: block;
+                color: var(--primary); /* Color inicial del icono */
+                font-size: 2.2rem; /* Tamaño más grande */
+                transition: all 0.4s ease; /* Transición suave */
+                position: relative; /* Para posicionar el icono de cerrar */
+                z-index: 1002; /* Asegura que esté por encima del menú */
+            }
+
+            /* Animación del icono de hamburguesa a cruz */
+            .hamburger.active .fa-bars {
+                opacity: 0;
+                transform: rotate(90deg);
+            }
+            .hamburger.active .fa-times {
+                opacity: 1;
+                transform: rotate(0deg);
+            }
+            .hamburger .fa-times { /* Icono de cerrar, inicialmente oculto */
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                transform: rotate(-90deg);
+                transition: all 0.4s ease;
             }
             
             .home-content h1 {
                 font-size: 2.8rem;
-            }
-            
-            .home-content p {
-                font-size: 1.1rem;
             }
             
             .section-title {
@@ -1051,6 +1095,18 @@
             .rating-card {
                 width: 250px; /* Ajuste aún más el ancho de las tarjetas */
                 margin-right: 15px;
+            }
+
+            /* Estilos específicos para el efecto de máquina de escribir en móvil */
+            .typewriter-container {
+                display: block; /* Permite que el contenedor ocupe todo el ancho y el texto se ajuste */
+                max-width: 90%; /* Limita el ancho para forzar el salto de línea */
+                margin: 0 auto 40px; /* Centra el contenedor */
+            }
+
+            .typewriter-text {
+                white-space: normal; /* Permite que el texto se ajuste a la siguiente línea */
+                word-break: break-word; /* Permite que las palabras se rompan si son demasiado largas */
             }
         }
         
@@ -1108,6 +1164,7 @@
         </div>
         <div class="hamburger">
             <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i> <!-- Icono de cerrar, inicialmente oculto -->
         </div>
     </nav>
     
@@ -1510,7 +1567,7 @@
                 portfolioItem.classList.add('portfolio-item');
                 // Add animation delay based on index for staggered appearance
                 portfolioItem.style.animationDelay = `${0.5 + index * 0.2}s`; 
-
+                
                 const tagsHtml = item.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
                 // Changed from <a> to <button> and added onclick for navigation
