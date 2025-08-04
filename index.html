@@ -44,7 +44,6 @@
             line-height: 1.3;
         }
         
-        /* Preloader */
         .preloader {
             position: fixed;
             top: 0;
@@ -72,7 +71,6 @@
             animation: spin 1s ease-in-out infinite;
         }
         
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -166,8 +164,6 @@
             transform: rotate(90deg);
         }
         
-        /* Sections */
-        /* Por defecto, las secciones son visibles. Las animaciones se aplicarán a los elementos internos. */
         section {
             min-height: 100vh;
             padding: 120px 100px;
@@ -176,32 +172,27 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            /* Eliminamos opacity y transform inicial aquí para que #home sea visible */
-            transition: opacity 1s ease-out, transform 1s ease-out; /* Transición suave para cuando se añada animated */
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
-        /* Reglas para secciones que SÍ deben animarse al aparecer (todas excepto #home) */
         section:not(#home) {
-            opacity: 0; /* Estado inicial para la animación de la sección */
-            transform: translateY(50px); /* Estado inicial para la animación de la sección */
+            opacity: 0;
+            transform: translateY(50px);
         }
 
-        /* Clase para activar la animación de la sección (para todas excepto #home) */
         section:not(#home).animated {
             opacity: 1;
             transform: translateY(0);
         }
         
-        /* Home Section */
         #home {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             text-align: center;
             padding-top: 180px;
-            position: relative; /* Necesario para el posicionamiento del canvas */
+            position: relative;
         }
 
-        /* Canvas para el fondo interactivo */
         #home-canvas {
             position: absolute;
             top: 0;
@@ -215,17 +206,16 @@
         .home-content {
             max-width: 900px;
             margin: 0 auto;
-            opacity: 0; /* Estado inicial para la animación de home-content */
-            transform: translateY(50px); /* Estado inicial para la animación de home-content */
-            transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s; /* Transición para la animación */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s;
             position: relative;
             z-index: 2;
-            display: flex; /* Hacer de home-content un contenedor flex */
-            flex-direction: column; /* Apilar los hijos verticalmente */
-            align-items: center; /* Centrar los hijos horizontalmente */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Clase para activar la animación de home-content */
         .home-content.animated {
             opacity: 1;
             transform: translateY(0);
@@ -239,40 +229,37 @@
         }
         
         .gradient-text {
-            background: linear-gradient(90deg, #a29bfe, #fd79a8); /* Gradiente cambiado para mejor contraste */
+            background: linear-gradient(90deg, #a29bfe, #fd79a8);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             display: inline;
-            font-weight: 800; /* Texto más negrita */
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Sutil brillo blanco añadido */
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
         }
         
-        /* Estilos para el efecto de máquina de escribir en escritorio */
         .typewriter-container {
-            display: inline-block; /* Para contener el efecto de máquina de escribir */
-            overflow: hidden; /* Ocultar el texto desbordante */
-            white-space: nowrap; /* Evitar que el texto se ajuste */
-            margin: 0 auto 40px; /* Margen inferior añadido para separar del botón */
-            font-size: 1.3rem; /* Coincidir con el tamaño de fuente del párrafo */
-            color: white; /* Asegurar que el texto sea visible */
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto 40px;
+            font-size: 1.3rem;
+            color: white;
             text-align: center;
         }
 
         .typewriter-text {
             display: inline-block;
             overflow: hidden;
-            border-right: .15em solid var(--accent); /* Cursor */
+            border-right: .15em solid var(--accent);
             white-space: nowrap;
-            letter-spacing: .10em; /* Espaciado de letras ajustado */
+            letter-spacing: .10em;
             animation: 
-                typing 3.5s steps(30, end) forwards, /* Duración y pasos ajustados */
+                typing 3.5s steps(30, end) forwards,
                 blink-caret .75s step-end infinite;
-            font-size: 1.3rem; /* Asegurar un tamaño de fuente consistente */
-            max-width: 100%; /* Asegurar que no se desborde */
+            font-size: 1.3rem;
+            max-width: 100%;
         }
-        
-        /* Removed home-content p as its styles are now handled by typewriter-container */
         
         .cta-button {
             display: inline-block;
@@ -328,7 +315,6 @@
             transform: translateX(-50%) scale(1.1);
         }
         
-        /* About Section */
         #about {
             background: white;
         }
@@ -339,14 +325,13 @@
             color: var(--primary);
             position: relative;
             display: inline-block;
-            opacity: 0; /* Initial state */
-            transform: translateY(50px); /* Initial state */
-            transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
             text-align: center;
             width: 100%;
         }
         
-        /* Animation for .section-title when parent section is animated */
         section.animated .section-title {
             opacity: 1;
             transform: translateY(0);
@@ -371,23 +356,22 @@
         
         .about-content {
             display: flex;
-            flex-direction: column; /* Changed to column to stack text and image (though image is removed now) */
+            flex-direction: column;
             gap: 60px;
-            align-items: center; /* Center items horizontally */
+            align-items: center;
             margin-bottom: 60px;
-            max-width: 900px; /* Limit width for better readability and centering */
-            margin: 0 auto 60px; /* Center the block horizontally */
+            max-width: 900px;
+            margin: 0 auto 60px;
         }
         
         .about-text {
             flex: 1;
-            opacity: 0; /* Initial state */
-            transform: translateX(-50px); /* Initial state */
-            transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s; /* Transition with delay */
-            text-align: center; /* Center the text content */
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
+            text-align: center;
         }
 
-        /* Animation for .about-text when parent section is animated */
         #about.animated .about-text {
             opacity: 1;
             transform: translateX(0);
@@ -416,16 +400,13 @@
             font-weight: 600;
         }
         
-        /* Removed .about-image and related styles as per user request */
-        
         .stats {
             display: flex;
             gap: 30px;
             margin-top: 20px;
-            /* Added for centering the stats block */
-            max-width: 900px; /* Limit width for better readability and centering */
-            margin: 20px auto 0; /* Center the block horizontally */
-            justify-content: center; /* Center stat items if they don't fill the width */
+            max-width: 900px;
+            margin: 20px auto 0;
+            justify-content: center;
         }
         
         .stat-item {
@@ -435,11 +416,10 @@
             border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            opacity: 0; /* Initial state */
-            transform: translateY(50px); /* Initial state */
+            opacity: 0;
+            transform: translateY(50px);
         }
 
-        /* Animation for .stat-item when parent section is animated */
         #about.animated .stat-item {
             opacity: 1;
             transform: translateY(0);
@@ -459,18 +439,17 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Styles for stars in stat-number */
         .stat-number.stars-container {
-            font-size: 2.5rem; /* Adjust font size for stars to fit */
-            color: #FFD700; /* Gold color for stars */
+            font-size: 2.5rem;
+            color: #FFD700;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 5px; /* Space between stars */
+            gap: 5px;
         }
 
         .stat-number.stars-container .fa-star {
-            transition: color 0.3s ease-in-out; /* Smooth transition for star fill */
+            transition: color 0.3s ease-in-out;
         }
         
         .stat-text {
@@ -479,7 +458,6 @@
             font-weight: 500;
         }
         
-        /* Portfolio Section */
         #portfolio {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
         }
@@ -504,12 +482,11 @@
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            opacity: 0; /* Initial state */
-            transform: translateY(50px); /* Initial state */
+            opacity: 0;
+            transform: translateY(50px);
             position: relative;
         }
         
-        /* Animation for .portfolio-item when parent section is animated */
         #portfolio.animated .portfolio-item {
             opacity: 1;
             transform: translateY(0);
@@ -531,8 +508,6 @@
         .portfolio-item:hover::before {
             opacity: 1;
         }
-        
-        /* Removed individual portfolio-item animations as they are now handled by JS dynamic generation */
         
         .portfolio-item:hover {
             transform: translateY(-15px) scale(1.02);
@@ -597,7 +572,6 @@
             color: white;
         }
         
-        /* Styles for the "View Project" button */
         .portfolio-button { 
             display: inline-flex;
             align-items: center;
@@ -622,50 +596,48 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
         }
 
-        /* Ratings Section */
         #ratings {
             background: var(--lighter);
-            padding: 80px 0; /* Ajustado para que el carrusel ocupe menos altura */
-            min-height: auto; /* Permite que la altura se ajuste al contenido */
-            overflow: hidden; /* Oculta el desbordamiento del carrusel */
+            padding: 80px 0;
+            min-height: auto;
+            overflow: hidden;
         }
 
         #ratings .section-title {
-            margin-bottom: 40px; /* Menos margen inferior para el título */
+            margin-bottom: 40px;
         }
 
         .ratings-carousel-container {
             width: 100%;
-            overflow: hidden; /* Oculta las tarjetas que están fuera de vista */
+            overflow: hidden;
             position: relative;
-            padding: 20px 0; /* Espacio para las sombras */
+            padding: 20px 0;
         }
 
         .ratings-carousel {
             display: flex;
-            animation: scroll-left 40s linear infinite; /* Velocidad y tipo de animación */
-            padding: 20px 0; /* Espacio interno para las tarjetas */
+            animation: scroll-left 40s linear infinite;
+            padding: 20px 0;
         }
 
         .ratings-carousel:hover {
-            animation-play-state: paused; /* Pausa la animación al pasar el ratón */
+            animation-play-state: paused;
         }
 
         .rating-card {
-            flex: 0 0 auto; /* No permite que las tarjetas se encojan */
-            width: 320px; /* Ancho fijo para cada tarjeta */
+            flex: 0 0 auto;
+            width: 320px;
             background: white;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             padding: 30px;
-            margin-right: 30px; /* Espacio entre tarjetas */
+            margin-right: 30px;
             text-align: left;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0; /* Estado inicial para la animación */
-            transform: translateY(50px); /* Estado inicial para la animación */
+            opacity: 0;
+            transform: translateY(50px);
         }
 
-        /* Animación para .rating-card cuando la sección es animada */
         #ratings.animated .rating-card {
             opacity: 1;
             transform: translateY(0);
@@ -677,7 +649,7 @@
         }
 
         .rating-card .stars {
-            color: #FFD700; /* Color dorado para las estrellas */
+            color: #FFD700;
             margin-bottom: 15px;
             font-size: 1.2rem;
         }
@@ -699,7 +671,6 @@
             font-size: 1.1rem;
         }
         
-        /* Contact Section */
         #contact {
             background: linear-gradient(135deg, var(--darker), var(--dark));
             color: white;
@@ -708,12 +679,11 @@
         
         #contact p {
             margin-bottom: 50px;
-            opacity: 0; /* Initial state */
-            transform: translateY(50px); /* Initial state */
-            transition: opacity 1s forwards 0.3s, transform 1s forwards 0.3s; /* Transition with delay */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s forwards 0.3s, transform 1s forwards 0.3s;
         }
 
-        /* Animation for contact paragraph when parent section is animated */
         #contact.animated p {
             opacity: 1;
             transform: translateY(0);
@@ -738,16 +708,15 @@
             border-radius: 20px;
             min-width: 220px;
             max-width: 100%;
-            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); /* Slower transition for rotation */
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(50px) rotateY(90deg); /* Initial state for rotation animation */
+            opacity: 0;
+            transform: translateY(50px) rotateY(90deg);
             box-sizing: border-box;
             word-break: break-word;
         }
 
-        /* Class to activate contact item animation */
         .contact-item.animated {
             opacity: 1;
             transform: translateY(0) rotateY(0deg);
@@ -755,7 +724,7 @@
         
         .contact-item:hover {
             background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-10px) scale(1.05) rotateY(0deg); /* Keep rotation at 0 on hover */
+            transform: translateY(-10px) scale(1.05) rotateY(0deg);
             border-color: rgba(255, 255, 255, 0.2);
         }
         
@@ -788,7 +757,6 @@
             color: var(--accent);
         }
         
-        /* Footer */
         footer {
             background: var(--darker);
             color: white;
@@ -866,7 +834,6 @@
             background-repeat: no-repeat;
         }
         
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -928,13 +895,11 @@
             50% { border-color: var(--accent); }
         }
 
-        /* Animación para el carrusel de ratings */
         @keyframes scroll-left {
             0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); } /* Desplaza el 50% del contenido para un bucle continuo */
+            100% { transform: translateX(-50%); }
         }
         
-        /* Responsive Design */
         @media (max-width: 1200px) {
             nav {
                 padding: 25px 60px;
@@ -975,7 +940,7 @@
             }
             
             .about-text {
-                width: 100%; /* Ensure text takes full width in column layout */
+                width: 100%;
             }
             
             .stats {
@@ -987,7 +952,7 @@
             }
 
             .rating-card {
-                width: 280px; /* Ajuste el ancho de las tarjetas en pantallas más pequeñas */
+                width: 280px;
                 margin-right: 20px;
             }
         }
@@ -997,41 +962,38 @@
                 padding: 20px 30px;
             }
             
-            /* Mejoras para la barra lateral de navegación en móvil */
             .nav-links {
                 position: fixed;
                 top: 0;
-                /* Cambiado para que el menú ocupe todo el ancho de la pantalla */
-                left: -100vw; /* Inicia fuera de la vista */
-                width: 100vw; /* Ocupa todo el ancho de la ventana */
+                left: -100vw;
+                width: 100vw;
                 height: 100vh;
-                background: linear-gradient(135deg, var(--primary), var(--primary-dark)); /* Gradiente atractivo */
+                background: linear-gradient(135deg, var(--primary), var(--primary-dark));
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 gap: 40px;
                 transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-                box-shadow: 0 0 50px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
-                z-index: 999; /* Asegura que esté por encima de todo */
-                padding: 20px; /* Espaciado interno */
-                backdrop-filter: blur(8px); /* Efecto de desenfoque */
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+                z-index: 999;
+                padding: 20px;
+                backdrop-filter: blur(8px);
             }
             
             .nav-links.active {
-                left: 0; /* Desliza el menú a la vista */
+                left: 0;
             }
 
             .nav-links a {
-                color: white; /* Color de texto blanco para contraste */
-                font-size: 2rem; /* Tamaño de fuente más grande */
-                font-weight: 700; /* Más negrita */
-                padding: 15px 0; /* Mayor padding para facilitar el toque */
-                opacity: 0; /* Inicialmente oculto para animación */
-                transform: translateY(20px); /* Desplazado para animación */
-                transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Transición para los enlaces */
+                color: white;
+                font-size: 2rem;
+                font-weight: 700;
+                padding: 15px 0;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.4s ease-out, transform 0.4s ease-out;
             }
 
-            /* Animación escalonada para los enlaces cuando el menú está activo */
             .nav-links.active a:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
             .nav-links.active a:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
             .nav-links.active a:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
@@ -1039,20 +1001,18 @@
             .nav-links.active a:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
 
             .nav-links a::after {
-                background: var(--accent); /* Color de acento para el subrayado */
+                background: var(--accent);
             }
             
-            /* Mejoras para el icono de hamburguesa */
             .hamburger {
                 display: block;
-                color: var(--primary); /* Color inicial del icono */
-                font-size: 2.2rem; /* Tamaño más grande */
-                transition: all 0.4s ease; /* Transición suave */
-                position: relative; /* Para posicionar el icono de cerrar */
-                z-index: 1002; /* Asegura que esté por encima del menú */
+                color: var(--primary);
+                font-size: 2.2rem;
+                transition: all 0.4s ease;
+                position: relative;
+                z-index: 1002;
             }
 
-            /* Animación del icono de hamburguesa a cruz */
             .hamburger.active .fa-bars {
                 opacity: 0;
                 transform: rotate(90deg);
@@ -1061,7 +1021,7 @@
                 opacity: 1;
                 transform: rotate(0deg);
             }
-            .hamburger .fa-times { /* Icono de cerrar, inicialmente oculto */
+            .hamburger .fa-times {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -1093,20 +1053,19 @@
             }
 
             .rating-card {
-                width: 250px; /* Ajuste aún más el ancho de las tarjetas */
+                width: 250px;
                 margin-right: 15px;
             }
 
-            /* Estilos específicos para el efecto de máquina de escribir en móvil */
             .typewriter-container {
-                display: block; /* Permite que el contenedor ocupe todo el ancho y el texto se ajuste */
-                max-width: 90%; /* Limita el ancho para forzar el salto de línea */
-                margin: 0 auto 40px; /* Centra el contenedor */
+                display: block;
+                max-width: 90%;
+                margin: 0 auto 40px;
             }
 
             .typewriter-text {
-                white-space: normal; /* Permite que el texto se ajuste a la siguiente línea */
-                word-break: break-word; /* Permite que las palabras se rompan si son demasiado largas */
+                white-space: normal;
+                word-break: break-word;
             }
         }
         
@@ -1132,13 +1091,13 @@
             }
 
             .rating-card {
-                width: 90%; /* Las tarjetas ocupan casi todo el ancho en móviles */
-                margin: 0 auto 20px; /* Centra y añade margen inferior */
+                width: 90%;
+                margin: 0 auto 20px;
             }
 
             .ratings-carousel {
-                flex-wrap: nowrap; /* Asegura que no se envuelvan */
-                justify-content: flex-start; /* Alinea al inicio */
+                flex-wrap: nowrap;
+                justify-content: flex-start;
             }
         }
         .portfolio-item::before {
@@ -1147,30 +1106,27 @@
     </style>
 </head>
 <body>
-    <!-- Preloader -->
     <div class="preloader">
         <div class="loader"></div>
     </div>
     
-    <!-- Navigation -->
     <nav id="navbar">
         <a href="#" class="logo">Prestige<span>Websites</span></a>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#about">About Us</a>
             <a href="#portfolio">Portfolio</a>
-            <a href="#ratings">Ratings</a> <!-- Nuevo enlace de navegación -->
+            <a href="#ratings">Ratings</a>
             <a href="#contact">Contact</a>
         </div>
         <div class="hamburger">
             <i class="fas fa-bars"></i>
-            <i class="fas fa-times"></i> <!-- Icono de cerrar, inicialmente oculto -->
+            <i class="fas fa-times"></i>
         </div>
     </nav>
     
-    <!-- Home Section -->
     <section id="home">
-        <canvas id="home-canvas"></canvas> <!-- Canvas for the interactive background -->
+        <canvas id="home-canvas"></canvas>
         <div class="home-content">
             <h1>Crafting Digital <span class="gradient-text">Masterpieces</span></h1>
             <div class="typewriter-container">
@@ -1183,7 +1139,6 @@
         </a>
     </section>
     
-    <!-- About Section -->
     <section id="about">
         <h2 class="section-title">About Us</h2>
         <div class="about-content">
@@ -1204,7 +1159,6 @@
                 <h3>What We Value</h3>
                 <p>We value transparency in every step of the process — from open communication and clear timelines to honest feedback and accountability. We prioritize performance by building fast, responsive, and conversion-focused websites backed by data and real-world results. Collaboration is at the core of how we work; your vision and goals guide every decision we make. And above all, we value quality — no shortcuts, no compromises, just work we’re proud to stand behind.</p>
             </div>
-            <!-- Removed the about-image div as per user request -->
         </div>
         <div class="stats">
             <div class="stat-item">
@@ -1222,27 +1176,22 @@
         </div>
     </section>
     
-    <!-- Portfolio Section -->
     <section id="portfolio">
         <div class="portfolio-header">
             <h2 class="section-title">Our <span class="highlight">Work</span></h2>
         </div>
         <div class="portfolio-grid" id="portfolio-grid-container">
-            <!-- Portfolio items will be dynamically loaded here -->
         </div>
     </section>
 
-    <!-- Ratings Section -->
     <section id="ratings">
         <h2 class="section-title">Client <span class="highlight">Testimonials</span></h2>
         <div class="ratings-carousel-container">
             <div class="ratings-carousel" id="ratings-carousel">
-                <!-- Rating cards will be dynamically loaded here -->
             </div>
         </div>
     </section>
     
-    <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Get In <span class="highlight">Touch</span></h2>
         <p>Ready to elevate your digital presence? Contact us today for a free consultation.</p>
@@ -1274,7 +1223,6 @@
         </div>
     </section>
     
-    <!-- Footer -->
     <footer>
         <div class="footer-wave"></div>
         <div class="footer-content">
@@ -1291,7 +1239,6 @@
     </footer>
     
     <script>
-        // Preloader
         window.addEventListener('load', function() {
             window.scrollTo(0,0);
             const preloader = document.querySelector('.preloader');
@@ -1299,14 +1246,12 @@
                 preloader.classList.add('fade-out');
                 setTimeout(function() {
                     preloader.style.display = 'none';
-                    // Activate home-content animation after preloader disappears
                     document.querySelector('.home-content').classList.add('animated');
                 }, 500);
                 window.scrollTo(0,0);
             }, 500);
         });
         
-        // Navigation scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -1316,7 +1261,6 @@
             }
         });
         
-        // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         
@@ -1325,7 +1269,6 @@
             hamburger.classList.toggle('active');
         });
         
-        // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -1333,7 +1276,6 @@
             });
         });
         
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1348,10 +1290,9 @@
             });
         });
         
-        // Typewriter effect logic
         const typewriterTextElement = document.querySelector('.typewriter-text');
         const textToType = typewriterTextElement.textContent;
-        typewriterTextElement.textContent = ''; // Clear initial text
+        typewriterTextElement.textContent = '';
 
         let charIndex = 0;
         let typingTimeout;
@@ -1360,32 +1301,27 @@
             if (charIndex < textToType.length) {
                 typewriterTextElement.textContent += textToType.charAt(charIndex);
                 charIndex++;
-                typingTimeout = setTimeout(typeWriter, 70); // Adjust typing speed here
+                typingTimeout = setTimeout(typeWriter, 70);
             } else {
-                // Once typing is complete, remove the blinking cursor animation
                 typewriterTextElement.style.borderRight = 'none'; 
             }
         }
 
-        // Start typing after a short delay
         setTimeout(typeWriter, 1000);
 
 
-        // Interactive background canvas (dots and lines)
         const canvas = document.getElementById('home-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const numParticles = 80; // Number of particles
-        const maxDistance = 100; // Max distance for lines to connect
+        const numParticles = 80;
+        const maxDistance = 100;
 
-        // Resize canvas when window resizes
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initParticles(); // Re-initialize particles on resize
+            initParticles();
         }
 
-        // Particle class
         class Particle {
             constructor(x, y, directionX, directionY, size, color) {
                 this.x = x;
@@ -1396,7 +1332,6 @@
                 this.color = color;
             }
 
-            // Draw particle
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
@@ -1404,9 +1339,7 @@
                 ctx.fill();
             }
 
-            // Update particle position and draw (without mouse interaction)
             update() {
-                // Reverse direction if hitting edges
                 if (this.x + this.size > canvas.width || this.x - this.size < 0) {
                     this.directionX = -this.directionX;
                 }
@@ -1421,21 +1354,19 @@
             }
         }
 
-        // Initialize particles
         function initParticles() {
             particles = [];
             for (let i = 0; i < numParticles; i++) {
-                let size = (Math.random() * 2) + 1; // Particle size between 1 and 3
+                let size = (Math.random() * 2) + 1;
                 let x = (Math.random() * ((canvas.width - size * 2) - (size * 2)) + size * 2);
                 let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 0.5) - 0.25; // Speed and direction
+                let directionX = (Math.random() * 0.5) - 0.25;
                 let directionY = (Math.random() * 0.5) - 0.25;
-                let color = 'rgba(255, 255, 255, 0.3)'; // White with transparency
+                let color = 'rgba(255, 255, 255, 0.3)';
                 particles.push(new Particle(x, y, directionX, directionY, size, color));
             }
         }
 
-        // Connect particles with lines
         function connectParticles() {
             let opacityValue = 1;
             for (let a = 0; a < particles.length; a++) {
@@ -1455,7 +1386,6 @@
             }
         }
 
-        // Animation loop
         function animateCanvas() {
             requestAnimationFrame(animateCanvas);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1466,37 +1396,33 @@
             connectParticles();
         }
 
-        // Initialize and start canvas animation
         window.addEventListener('load', () => {
-            resizeCanvas(); // Set initial canvas size
+            resizeCanvas();
             animateCanvas();
         });
         window.addEventListener('resize', resizeCanvas);
 
 
-        // Function to animate filling of stars
         function animateStars(element, rating) {
-            element.innerHTML = ''; // Clear existing content
+            element.innerHTML = '';
             const stars = [];
             for (let i = 0; i < 5; i++) {
                 const star = document.createElement('i');
-                star.classList.add('far', 'fa-star'); // Start with empty stars
+                star.classList.add('far', 'fa-star');
                 stars.push(star);
                 element.appendChild(star);
             }
 
-            // Animate filling stars
             for (let i = 0; i < rating; i++) {
                 setTimeout(() => {
-                    if (stars[i]) { // Check if star exists before modifying
+                    if (stars[i]) {
                         stars[i].classList.remove('far');
-                        stars[i].classList.add('fas'); // Fill the star
+                        stars[i].classList.add('fas');
                     }
-                }, i * 200); // Staggered delay for each star
+                }, i * 200);
             }
         }
 
-        // Number counting animation for stats (sequential animation)
         const statItems = document.querySelectorAll('.stat-item');
 
         const startCounter = (entry, observer) => {
@@ -1512,7 +1438,7 @@
                         const suffix = statNumber.dataset.suffix || '';
                         const isDecimal = target % 1 !== 0;
                         let current = 0;
-                        const duration = 1500; // 1.5 seconds for each counter
+                        const duration = 1500;
                         const step = target / (duration / 10);
 
                         const updateCounter = () => {
@@ -1534,11 +1460,10 @@
                                 }
                             }
                         };
-                        // Add a small delay for the number counters too, consistent with star animation
-                        setTimeout(updateCounter, index * 500); // 500ms delay between each counter
+                        setTimeout(updateCounter, index * 500);
                     }
                 });
-                observer.unobserve(entry.target); // Stop observing once animated
+                observer.unobserve(entry.target);
             }
         };
 
@@ -1546,32 +1471,27 @@
             entries.forEach(entry => {
                 startCounter(entry, observer);
             });
-        }, { threshold: 0.5 }); // Trigger when 50% of the element is visible
+        }, { threshold: 0.5 });
 
-        // Observe only the first stat item to trigger the sequence
         if (statItems.length > 0) {
             observer.observe(statItems[0]);
         }
 
 
-        // Dynamic Portfolio Generation
         const portfolioData = [
         ];
 
         const portfolioGridContainer = document.getElementById('portfolio-grid-container');
 
         function generatePortfolioItems() {
-            portfolioGridContainer.innerHTML = ''; // Clear existing items
+            portfolioGridContainer.innerHTML = '';
             portfolioData.forEach((item, index) => {
                 const portfolioItem = document.createElement('div');
                 portfolioItem.classList.add('portfolio-item');
-                // Add animation delay based on index for staggered appearance
                 portfolioItem.style.animationDelay = `${0.5 + index * 0.2}s`; 
                 
                 const tagsHtml = item.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
-                // Changed from <a> to <button> and added onclick for navigation
-                // A console.log has been added for debugging.
                 portfolioItem.innerHTML = `
                     <div class="portfolio-image">
                         <img src="${item.imageUrl}" alt="${item.title}">
@@ -1593,10 +1513,8 @@
             });
         }
 
-        // Call function to generate portfolio items on load
         window.addEventListener('load', generatePortfolioItems);
 
-        // Dynamic Ratings Generation
         const ratingsData = [
             {
                 name: "Eleanor Vance",
@@ -1636,23 +1554,21 @@
             let starsHtml = '';
             for (let i = 1; i <= 5; i++) {
                 if (i <= rating) {
-                    starsHtml += '<i class="fas fa-star"></i>'; // Filled star
+                    starsHtml += '<i class="fas fa-star"></i>';
                 } else {
-                    starsHtml += '<i class="far fa-star"></i>'; // Empty star
+                    starsHtml += '<i class="far fa-star"></i>';
                 }
             }
             return starsHtml;
         }
 
         function generateRatings() {
-            ratingsCarousel.innerHTML = ''; // Clear existing elements
-            // Duplicate data to create a continuous loop effect
+            ratingsCarousel.innerHTML = '';
             const allRatings = [...ratingsData, ...ratingsData]; 
 
             allRatings.forEach((item, index) => {
                 const ratingCard = document.createElement('div');
                 ratingCard.classList.add('rating-card');
-                // Add staggered animation delay for appearance
                 ratingCard.style.animationDelay = `${0.5 + index * 0.1}s`; 
 
                 ratingCard.innerHTML = `
@@ -1666,75 +1582,66 @@
             });
         }
 
-        // Call function to generate ratings on page load
         window.addEventListener('load', generateRatings);
 
 
-        // Intersection Observer for section animations
         const sections = document.querySelectorAll('section');
 
         const sectionObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Only add 'animated' class to the section if it's not the home section
                     if (entry.target.id !== 'home') {
                         entry.target.classList.add('animated');
                     }
                     
-                    // Specific handling for elements inside the About section
                     if (entry.target.id === 'about') {
                         entry.target.querySelectorAll('.section-title, .about-text, .stat-item').forEach((item, index) => {
-                            // Apply staggered animation for stat elements, direct animation for others
                             if (item.classList.contains('stat-item')) {
                                 setTimeout(() => {
                                     item.classList.add('animated');
-                                }, index * 150); // Staggered delay for each stat element
+                                }, index * 150);
                             } else {
                                 item.classList.add('animated');
                             }
                         });
                     }
-                    // Specific handling for elements inside the Portfolio section
                     else if (entry.target.id === 'portfolio') {
                         entry.target.querySelectorAll('.section-title, .portfolio-item').forEach((item, index) => {
                             if (item.classList.contains('portfolio-item')) {
                                 setTimeout(() => {
                                     item.classList.add('animated');
-                                }, index * 150); // Staggered delay for each portfolio element
+                                }, index * 150);
                             } else {
                                 item.classList.add('animated');
                             }
                         });
                     }
-                    // Specific handling for elements inside the Ratings section
                     else if (entry.target.id === 'ratings') {
                         entry.target.querySelector('.section-title').classList.add('animated');
                         entry.target.querySelectorAll('.rating-card').forEach((item, index) => {
                             setTimeout(() => {
                                 item.classList.add('animated');
-                            }, index * 100); // Staggered delay for each rating card
+                            }, index * 100);
                         });
                     }
-                    // Special handling for the contact section to activate sequential card rotation
                     else if (entry.target.id === 'contact') {
                         entry.target.querySelector('.section-title').classList.add('animated');
-                        entry.target.querySelector('p').classList.add('animated'); // Animate the paragraph
+                        entry.target.querySelector('p').classList.add('animated');
                         const contactItems = entry.target.querySelectorAll('.contact-item');
                         contactItems.forEach((item, index) => {
                             setTimeout(() => {
                                 item.classList.add('animated');
-                            }, index * 150); // Staggered delay for each card
+                            }, index * 150);
                         });
                     }
-                    observer.unobserve(entry.target); // Stop observing once animated
+                    observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.10 // Activate when 10% of the section is visible (changed from 0.40)
+            threshold: 0.10
         });
 
         sections.forEach(section => {
-            // Only observe sections that are not the home section, as home has its own animation
             if (section.id !== 'home') {
                 sectionObserver.observe(section);
             }
