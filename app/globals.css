@@ -1,0 +1,70 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  
+  /* Prestige Websites Color Palette */
+  --primary: #6c5ce7;
+  --primary-dark: #5649c0;
+  --secondary: #a29bfe;
+  --dark: #2d3436;
+  --darker: #1e272e;
+  --light: #f5f6fa;
+  --lighter: #ffffff;
+  --accent: #fd79a8;
+  --accent-dark: #e66797;
+  --text: #555;
+  --text-light: #777;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-poppins), sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), serif;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+}
+
+/* Hide Next.js badge and error messages */
+body > nextjs-portal {
+  display: none;
+}
+
+/* Hide scrollbar but allow scrolling */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Smooth scrolling */
