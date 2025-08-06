@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { useRef, useEffect, useState } from 'react';
@@ -78,19 +79,19 @@ const AboutSection = () => {
   const textSections = [
     {
       title: "Who We Are",
-      content: "We are a boutique web design and development agency focused on creating high-impact digital experiences. At Prestige Websites, every website is thoughtfully built to match your brand, connect with your audience, and drive long-term growth."
+      content: "We are a boutique web design and development agency focused on creating high-impact digital experiences. At Prestige Websites, every website is thoughtfully built to match your brand, connect with your audience, and drive long-term growth.Our clients range from ambitious startups to established businesses that understand how powerful a strong online presence can be when done right."
     },
     {
       title: "Why Choose Us",
-      content: "We combine sharp design, smart strategy, and performance-first development to create websites that don't just look great — they deliver measurable results. Our process is detail-driven and intentional, with every decision based on your business goals."
+      content: "We combine sharp design, smart strategy, and performance-first development to create websites that don’t just look great — they deliver measurable results. Our process is detail- driven and intentional, with every decision based on your business goals, your users, and how to turn attention into action.From the structure and layout to the tiniest animations, everything is crafted with purpose. We go beyond launch — continuously optimizing your site, improving performance, enhancing user experience, and adapting to your growth so your website keeps delivering long after it’s live. This isn’t just web design.It’s a long - term digital asset built to grow your business."
     },
     {
       title: "Strategic SEO Built for Growth",
-      content: "Having a great website means nothing if no one sees it. That's why SEO isn't an add-on in our process — it's built into the foundation of every project we take on. We go far beyond basic keyword stuffing with data-driven, strategic approaches."
+      content: "Having a great website means nothing if no one sees it. That’s why SEO isn’t an add-on in our process — it’s built into the foundation of every project we take on. Search Engine Optimization(SEO) is what helps your website rank higher on Google and other search engines when potential customers search for the products or services you offer.Without it, your site is just another invisible page on the internet.With it, your business becomes discoverable, trusted, and chosen. We go far beyond basic keyword stuffing.Our SEO approach is data- driven, strategic, and constantly evolving.We have specialists who track, analyze, and refine your SEO performance every single month — monitoring traffic patterns, studying user behavior, reviewing ranking positions, and adjusting content and structure based on real results. This means your site doesn’t just launch optimized — it stays optimized."
     },
     {
       title: "What We Value",
-      content: "We value transparency in every step of the process, prioritize performance by building fast and responsive websites, and above all, we value quality — no shortcuts, no compromises, just work we're proud to stand behind."
+      content: "We value transparency in every step of the process — from open communication and clear timelines to honest feedback and accountability. We prioritize performance by building fast, responsive, and conversion-focused websites backed by data and real-world results. Collaboration is at the core of how we work; your vision and goals guide every decision we make. And above all, we value quality — no shortcuts, no compromises, just work we’re proud to stand behind."
     }
   ];
 

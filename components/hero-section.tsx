@@ -1,67 +1,10 @@
 
 
 
-
-
-
-
-
-
-
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, Float, Text3D, Center } from '@react-three/drei';
-import * as THREE from 'three';
-
-// 3D Particle System
-function ParticleField() {
-  const ref = useRef<THREE.Points>(null);
-  const [sphere] = useState(() => {
-    const positions = new Float32Array(2000 * 3);
-    for (let i = 0; i < 2000; i++) {
-      const radius = Math.random() * 25 + 5;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.random() * Math.PI;
-      
-      positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = radius * Math.cos(phi);
-    }
-    return positions;
-  });
-
-  useFrame((state) => {
-    if (ref.current) {
-      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
-      ref.current.rotation.y = state.clock.elapsedTime * 0.05;
-    }
-  });
-
-  return (
-    <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#ffffff"
-        size={0.8}
-        sizeAttenuation={true}
-        depthWrite={false}
-        opacity={0.2}
-      />
-    </Points>
-  );
-}
-
-// Floating 3D Elements
-function FloatingElements() {
-  return (
-    <>
-      {/* Removed all geometric shapes - only keeping empty component for now */}
-    </>
-  );
-}
 
 // Typewriter Effect Component
 const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
@@ -74,7 +17,7 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
         setDisplayText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
       }
-    }, currentIndex === 0 ? delay : 50); // Initial delay, then 50ms per character
+    }, currentIndex === 0 ? delay : 80); // Slightly slower for better readability
 
     return () => clearTimeout(timer);
   }, [currentIndex, text, delay]);
@@ -85,9 +28,245 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
-        className="inline-block w-0.5 h-8 bg-[#fd79a8] ml-1"
+        className="inline-block w-0.5 h-8 bg-white ml-1"
       />
     </span>
+  );
+};
+
+// Code snippets that will be typed
+const codeSnippets = [
+  "const createMagic = () => {",
+  "  const vision = 'extraordinary';",
+  "  const passion = 'unlimited';",
+  "  const result = vision + passion;",
+  "  return result;",
+  "};",
+  "",
+  "// Building digital dreams...",
+  "function buildWebsite() {",
+  "  const creativity = new Design();",
+  "  const technology = new Code();",
+  "  return creativity.merge(technology);",
+  "}"
+];
+
+// Animated Code Background Component
+const AnimatedCodeBackground = () => {
+  const [visibleLines, setVisibleLines] = useState<string[]>([]);
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+  const [codeOpacity, setCodeOpacity] = useState(1);
+  const [showSpheres, setShowSpheres] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
+
+  // Handle window dimensions safely
+  useEffect(() => {
+    const updateDimensions = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  useEffect(() => {
+    if (currentLineIndex >= codeSnippets.length) {
+      // Code typing finished, start fade out after a brief pause
+      const timer = setTimeout(() => {
+        setCodeOpacity(0);
+        // Show spheres after code starts fading
+        setTimeout(() => {
+          setShowSpheres(true);
+        }, 500);
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+
+    const currentLine = codeSnippets[currentLineIndex];
+    
+    if (currentCharIndex <= currentLine.length) {
+      const timer = setTimeout(() => {
+        setVisibleLines(prev => {
+          const newLines = [...prev];
+          newLines[currentLineIndex] = currentLine.slice(0, currentCharIndex);
+          return newLines;
+        });
+        setCurrentCharIndex(prev => prev + 1);
+      }, currentCharIndex === 0 ? 200 : 25);
+
+      return () => clearTimeout(timer);
+    } else {
+      // Line complete, move to next
+      const timer = setTimeout(() => {
+        setCurrentLineIndex(prev => prev + 1);
+        setCurrentCharIndex(0);
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [currentLineIndex, currentCharIndex]);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Code Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0f0f23] via-[#1a1a2e] to-[#16213e] opacity-90">
+        <motion.div 
+          className="absolute top-24 left-8 font-mono text-xs md:text-sm text-green-400/80 leading-relaxed"
+          animate={{ opacity: codeOpacity }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        >
+          {visibleLines.map((line, index) => (
+            <div key={index} className="flex items-center">
+              <span className="text-gray-500 mr-4 select-none">{String(index + 1).padStart(2, '0')}</span>
+              <span>{line}</span>
+              {index === currentLineIndex && currentCharIndex <= codeSnippets[currentLineIndex]?.length && (
+                <motion.span
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                  className="inline-block w-2 h-4 bg-green-400 ml-1"
+                />
+              )}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Floating Spheres - appear after code finishes */}
+      {showSpheres && (
+        <div className="absolute inset-0">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              initial={{ 
+                opacity: 0,
+                scale: 0,
+                x: Math.random() * dimensions.width,
+                y: Math.random() * dimensions.height
+              }}
+              animate={{ 
+                opacity: 1,
+                scale: 1,
+                x: [
+                  Math.random() * dimensions.width,
+                  Math.random() * dimensions.width,
+                  Math.random() * dimensions.width,
+                  Math.random() * dimensions.width
+                ],
+                y: [
+                  Math.random() * dimensions.height,
+                  Math.random() * dimensions.height,
+                  Math.random() * dimensions.height,
+                  Math.random() * dimensions.height
+                ]
+              }}
+              transition={{
+                opacity: { duration: 1.5, ease: "easeOut" },
+                scale: { duration: 1.5, ease: "easeOut" },
+                x: {
+                  duration: 25 + Math.random() * 15,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  delay: i * 0.3,
+                  ease: "easeInOut"
+                },
+                y: {
+                  duration: 25 + Math.random() * 15,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  delay: i * 0.3,
+                  ease: "easeInOut"
+                }
+              }}
+              className="absolute w-3 h-3 md:w-4 md:h-4 bg-white rounded-full"
+              style={{
+                boxShadow: '0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.3)',
+                filter: 'blur(0.5px)'
+              }}
+            />
+          ))}
+          
+          {/* Larger accent spheres */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={`large-${i}`}
+              initial={{ 
+                opacity: 0,
+                scale: 0,
+                x: Math.random() * dimensions.width,
+                y: Math.random() * dimensions.height
+              }}
+              animate={{ 
+                opacity: 0.8,
+                scale: 1.5,
+                x: [
+                  Math.random() * dimensions.width,
+                  Math.random() * dimensions.width,
+                  Math.random() * dimensions.width,
+                  Math.random() * dimensions.width
+                ],
+                y: [
+                  Math.random() * dimensions.height,
+                  Math.random() * dimensions.height,
+                  Math.random() * dimensions.height,
+                  Math.random() * dimensions.height
+                ]
+              }}
+              transition={{
+                opacity: { duration: 2, ease: "easeOut" },
+                scale: { duration: 2, ease: "easeOut" },
+                x: {
+                  duration: 35 + Math.random() * 20,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  delay: i * 0.4,
+                  ease: "easeInOut"
+                },
+                y: {
+                  duration: 35 + Math.random() * 20,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  delay: i * 0.4,
+                  ease: "easeInOut"
+                }
+              }}
+              className="absolute w-6 h-6 md:w-8 md:h-8 bg-gradient-to-r from-white to-blue-200 rounded-full"
+              style={{
+                boxShadow: '0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.4)',
+                filter: 'blur(1px)'
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Matrix-style falling characters */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={`matrix-${i}`}
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ 
+              y: dimensions.height + 100,
+              opacity: [0, 1, 0]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "linear"
+            }}
+            className="absolute text-green-400/30 font-mono text-xs"
+            style={{ left: `${Math.random() * 100}%` }}
+          >
+            {String.fromCharCode(33 + Math.random() * 94)}
+          </motion.div>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -112,21 +291,14 @@ const HeroSection = () => {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#6c5ce7] via-[#5649c0] to-[#2d3436]"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} color="#fd79a8" />
-          <ParticleField />
-          <FloatingElements />
-        </Canvas>
-      </div>
+      {/* Epic Animated Code Background */}
+      <AnimatedCodeBackground />
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6c5ce7]/20 to-[#2d3436]/40 z-10" />
+      {/* Gradient Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-transparent to-blue-900/20 z-10" />
 
       {/* Content */}
       <motion.div
@@ -136,7 +308,7 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 2 }} // Delay to let code animation start first
           className="space-y-8"
         >
           {/* Main Heading */}
@@ -144,32 +316,46 @@ const HeroSection = () => {
             className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.8 }}
+            transition={{ duration: 1.2, delay: 3 }}
           >
             Crafting Digital{' '}
-            <span className="bg-gradient-to-r from-[#a29bfe] via-[#fd79a8] to-[#6c5ce7] bg-clip-text text-transparent animate-pulse">
-              Masterpieces
+            <span className="bg-gradient-to-r from-[#a29bfe] via-[#fd79a8] to-[#6c5ce7] bg-clip-text text-transparent">
+              <motion.span
+                animate={{ 
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                style={{
+                  backgroundSize: "200% 200%"
+                }}
+              >
+                Masterpieces
+              </motion.span>
             </span>
           </motion.h1>
 
-          {/* Typewriter Subtitle */}
+          {/* Subtitle with typewriter effect */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2 }}
+            transition={{ delay: 4 }}
             className="text-xl md:text-2xl lg:text-3xl font-light mb-8"
           >
             <TypewriterText 
               text="Web Design & SEO That Elevates Your Brand" 
-              delay={0}
+              delay={5500}
             />
           </motion.div>
 
-          {/* CTA Button */}
+          {/* Enhanced CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3.5 }}
+            transition={{ duration: 0.8, delay: 5.5 }}
           >
             <motion.button
               onClick={() => scrollToSection('contact')}
@@ -178,9 +364,12 @@ const HeroSection = () => {
                 boxShadow: "0 20px 40px rgba(253, 121, 168, 0.4)"
               }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-12 py-4 bg-white text-[#6c5ce7] rounded-full font-bold text-lg md:text-xl overflow-hidden transition-all duration-300 hover:text-white"
+              className="group relative px-12 py-4 bg-white/10 backdrop-blur-md text-white rounded-full font-bold text-lg md:text-xl overflow-hidden transition-all duration-300 border border-white/20 hover:border-white/40"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-[#fd79a8] to-[#6c5ce7] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
+              <motion.span 
+                className="absolute inset-0 bg-gradient-to-r from-[#fd79a8] to-[#6c5ce7] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+                whileHover={{ scale: 1 }}
+              />
               <span className="relative z-10 flex items-center gap-3">
                 Start Your Project
                 <motion.svg
@@ -197,11 +386,11 @@ const HeroSection = () => {
             </motion.button>
           </motion.div>
 
-          {/* Floating Stats */}
+          {/* Enhanced Stats */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 4 }}
+            transition={{ delay: 6 }}
             className="flex flex-wrap justify-center gap-8 mt-16"
           >
             {[
@@ -213,9 +402,9 @@ const HeroSection = () => {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 4.5 + index * 0.2 }}
+                transition={{ delay: 6.5 + index * 0.2 }}
                 whileHover={{ scale: 1.1, y: -5 }}
-                className="bg-white/5 backdrop-blur-md rounded-2xl px-6 py-4 border border-white/10"
+                className="bg-white/5 backdrop-blur-md rounded-2xl px-6 py-4 border border-white/10 hover:border-white/20 transition-all duration-300"
               >
                 <div className="text-2xl md:text-3xl font-bold text-[#fd79a8]">{stat.number}</div>
                 <div className="text-sm md:text-base text-white/80">{stat.label}</div>
@@ -225,11 +414,11 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Enhanced Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 5 }}
+        transition={{ delay: 7 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
       >
         <motion.button
@@ -237,9 +426,9 @@ const HeroSection = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           whileHover={{ scale: 1.2 }}
-          className="text-white/70 hover:text-white transition-colors duration-300"
+          className="text-white/70 hover:text-white transition-colors duration-300 p-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10"
         >
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </motion.button>

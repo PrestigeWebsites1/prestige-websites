@@ -1,39 +1,8 @@
 
-
-
 "use client";
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Stars, Float, Text3D, Center } from '@react-three/drei';
-import * as THREE from 'three';
-
-// 3D Floating Stars
-function FloatingStars() {
-  const groupRef = useRef<THREE.Group>(null);
-  
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      <Stars radius={50} depth={50} count={1000} factor={4} saturation={0} fade speed={1} />
-      {[...Array(5)].map((_, i) => (
-        <Float key={i} speed={2 + i * 0.3} rotationIntensity={1} floatIntensity={2}>
-          <mesh position={[(i - 2) * 8, Math.sin(i) * 3, -10 + i * 2]}>
-            <sphereGeometry args={[0.3]} />
-            <meshStandardMaterial color="#FFD700" emissive="#FFD700" emissiveIntensity={0.5} />
-          </mesh>
-        </Float>
-      ))}
-    </group>
-  );
-}
 
 // Animated Star Rating
 const AnimatedStarRating = ({ rating, delay = 0 }: { rating: number; delay?: number }) => {
@@ -231,14 +200,37 @@ const TestimonialsSection = () => {
 
   return (
     <section id="testimonials" ref={containerRef} className="relative py-20 lg:py-32 bg-gradient-to-br from-[#2d3436] to-[#1e272e] overflow-hidden">
-      {/* 3D Background */}
+      {/* Animated CSS Background */}
       <div className="absolute inset-0 opacity-20">
-        <Canvas camera={{ position: [0, 0, 20], fov: 75 }}>
-          <ambientLight intensity={0.3} />
-          <pointLight position={[10, 10, 10]} intensity={0.8} color="#6c5ce7" />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} color="#fd79a8" />
-          <FloatingStars />
-        </Canvas>
+        {/* Floating stars effect with CSS */}
+        <div className="absolute inset-0">
+          {[...Array(100)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-yellow-300/30 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 3}s`
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Floating golden orbs */}
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-6 h-6 bg-yellow-400/20 rounded-full blur-sm animate-bounce"
+            style={{
+              left: `${20 + i * 15}%`,
+              top: `${30 + Math.sin(i) * 20}%`,
+              animationDelay: `${i * 0.3}s`,
+              animationDuration: `${3 + i * 0.3}s`
+            }}
+          />
+        ))}
       </div>
 
       {/* Background Decorations */}

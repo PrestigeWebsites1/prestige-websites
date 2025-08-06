@@ -3,70 +3,6 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, Float, MeshDistortMaterial } from '@react-three/drei';
-import * as THREE from 'three';
-
-// 3D Contact Orbs
-function ContactOrbs() {
-  const groupRef = useRef<THREE.Group>(null);
-  
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
-        <Sphere args={[1, 64, 64]} position={[-3, 2, 0]}>
-          <MeshDistortMaterial
-            color="#6c5ce7"
-            attach="material"
-            distort={0.4}
-            speed={2}
-            roughness={0.1}
-            metalness={0.8}
-            transparent
-            opacity={0.8}
-          />
-        </Sphere>
-      </Float>
-      
-      <Float speed={2} rotationIntensity={1.5} floatIntensity={1.5}>
-        <Sphere args={[0.8, 64, 64]} position={[3, -1, -2]}>
-          <MeshDistortMaterial
-            color="#fd79a8"
-            attach="material"
-            distort={0.3}
-            speed={1.5}
-            roughness={0.1}
-            metalness={0.9}
-            transparent
-            opacity={0.7}
-          />
-        </Sphere>
-      </Float>
-      
-      <Float speed={1.8} rotationIntensity={0.8} floatIntensity={2.5}>
-        <Sphere args={[0.6, 64, 64]} position={[0, -2, 1]}>
-          <MeshDistortMaterial
-            color="#a29bfe"
-            attach="material"
-            distort={0.5}
-            speed={2.5}
-            roughness={0.2}
-            metalness={0.7}
-            transparent
-            opacity={0.6}
-          />
-        </Sphere>
-      </Float>
-    </group>
-  );
-}
 
 // Contact Item Component
 const ContactItem = ({ 
@@ -246,15 +182,13 @@ const ContactSection = () => {
 
   return (
     <section id="contact" ref={containerRef} className="relative py-20 lg:py-32 bg-gradient-to-br from-[#2d3436] to-[#1e272e] overflow-hidden">
-      {/* 3D Background */}
+      {/* Animated CSS Background */}
       <div className="absolute inset-0 opacity-30">
-        <Canvas camera={{ position: [0, 0, 8], fov: 75 }}>
-          <ambientLight intensity={0.4} />
-          <pointLight position={[10, 10, 10]} intensity={1} color="#6c5ce7" />
-          <pointLight position={[-10, -10, -10]} intensity={0.8} color="#fd79a8" />
-          <pointLight position={[0, 10, -10]} intensity={0.6} color="#a29bfe" />
-          <ContactOrbs />
-        </Canvas>
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-[#6c5ce7]/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-1/2 right-1/3 w-24 h-24 bg-[#fd79a8]/20 rounded-full blur-xl animate-bounce" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-1/3 left-1/2 w-20 h-20 bg-[#a29bfe]/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/3 right-1/4 w-28 h-28 bg-[#6c5ce7]/15 rounded-full blur-2xl animate-bounce" style={{ animationDelay: '0.5s' }}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-36 h-36 bg-[#fd79a8]/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
       </div>
 
       {/* Background Decorations */}
