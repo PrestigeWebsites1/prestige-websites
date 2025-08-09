@@ -1,6 +1,11 @@
 
 
 
+
+
+
+
+
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
@@ -97,7 +102,7 @@ const AnimatedCodeBackground = () => {
           return newLines;
         });
         setCurrentCharIndex(prev => prev + 1);
-      }, currentCharIndex === 0 ? 200 : 25);
+      }, currentCharIndex === 0 ? 200 : 5);
 
       return () => clearTimeout(timer);
     } else {
@@ -138,7 +143,7 @@ const AnimatedCodeBackground = () => {
       {/* Floating Spheres - appear after code finishes */}
       {showSpheres && (
         <div className="absolute inset-0">
-          {[...Array(15)].map((_, i) => (
+          {[...Array(12)].map((_, i) => (
             <motion.div
               key={i}
               initial={{ 
@@ -148,49 +153,39 @@ const AnimatedCodeBackground = () => {
                 y: Math.random() * dimensions.height
               }}
               animate={{ 
-                opacity: 1,
+                opacity: 0.9,
                 scale: 1,
-                x: [
-                  Math.random() * dimensions.width,
-                  Math.random() * dimensions.width,
-                  Math.random() * dimensions.width,
-                  Math.random() * dimensions.width
-                ],
-                y: [
-                  Math.random() * dimensions.height,
-                  Math.random() * dimensions.height,
-                  Math.random() * dimensions.height,
-                  Math.random() * dimensions.height
-                ]
+                x: Math.random() * dimensions.width,
+                y: Math.random() * dimensions.height
               }}
               transition={{
                 opacity: { duration: 1.5, ease: "easeOut" },
                 scale: { duration: 1.5, ease: "easeOut" },
                 x: {
-                  duration: 25 + Math.random() * 15,
+                  duration: 20 + Math.random() * 10,
                   repeat: Infinity,
-                  repeatType: "loop",
-                  delay: i * 0.3,
+                  repeatType: "reverse",
+                  delay: i * 0.2,
                   ease: "easeInOut"
                 },
                 y: {
-                  duration: 25 + Math.random() * 15,
+                  duration: 15 + Math.random() * 10,
                   repeat: Infinity,
-                  repeatType: "loop",
-                  delay: i * 0.3,
+                  repeatType: "reverse",
+                  delay: i * 0.2,
                   ease: "easeInOut"
                 }
               }}
-              className="absolute w-3 h-3 md:w-4 md:h-4 bg-white rounded-full"
+              className="absolute w-3 h-3 md:w-4 md:h-4 bg-white rounded-full will-change-transform"
               style={{
-                boxShadow: '0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.3)',
-                filter: 'blur(0.5px)'
+                boxShadow: '0 0 25px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4)',
+                transform: 'translate3d(0, 0, 0)'
               }}
             />
           ))}
           
           {/* Larger accent spheres */}
-          {[...Array(8)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <motion.div
               key={`large-${i}`}
               initial={{ 
@@ -200,43 +195,33 @@ const AnimatedCodeBackground = () => {
                 y: Math.random() * dimensions.height
               }}
               animate={{ 
-                opacity: 0.8,
-                scale: 1.5,
-                x: [
-                  Math.random() * dimensions.width,
-                  Math.random() * dimensions.width,
-                  Math.random() * dimensions.width,
-                  Math.random() * dimensions.width
-                ],
-                y: [
-                  Math.random() * dimensions.height,
-                  Math.random() * dimensions.height,
-                  Math.random() * dimensions.height,
-                  Math.random() * dimensions.height
-                ]
+                opacity: 0.7,
+                scale: 1.2,
+                x: Math.random() * dimensions.width,
+                y: Math.random() * dimensions.height
               }}
               transition={{
                 opacity: { duration: 2, ease: "easeOut" },
                 scale: { duration: 2, ease: "easeOut" },
                 x: {
-                  duration: 35 + Math.random() * 20,
+                  duration: 25 + Math.random() * 15,
                   repeat: Infinity,
-                  repeatType: "loop",
-                  delay: i * 0.4,
+                  repeatType: "reverse",
+                  delay: i * 0.3,
                   ease: "easeInOut"
                 },
                 y: {
-                  duration: 35 + Math.random() * 20,
+                  duration: 20 + Math.random() * 15,
                   repeat: Infinity,
-                  repeatType: "loop",
-                  delay: i * 0.4,
+                  repeatType: "reverse",
+                  delay: i * 0.3,
                   ease: "easeInOut"
                 }
               }}
-              className="absolute w-6 h-6 md:w-8 md:h-8 bg-gradient-to-r from-white to-blue-200 rounded-full"
+              className="absolute w-5 h-5 md:w-6 md:h-6 bg-gradient-to-r from-white to-blue-200 rounded-full will-change-transform"
               style={{
-                boxShadow: '0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.4)',
-                filter: 'blur(1px)'
+                boxShadow: '0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.5), 0 0 70px rgba(173, 216, 230, 0.3)',
+                transform: 'translate3d(0, 0, 0)'
               }}
             />
           ))}
@@ -303,7 +288,7 @@ const HeroSection = () => {
       {/* Content */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-20 text-center text-white px-6 max-w-6xl mx-auto"
+        className="relative z-20 text-center text-white px-6 max-w-6xl mx-auto pt-20 md:pt-0"
       >
         <motion.div
           initial={{ opacity: 0, y: 50 }}
