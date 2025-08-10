@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useRef, useEffect, useState } from 'react';
@@ -128,177 +126,219 @@ const AboutSection = () => {
         </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-20">
-          {/* Logo Visual */}
+        <div className="space-y-16 lg:space-y-24 mb-20">
+          {/* Who We Are - Full Width */}
           <motion.div
-            style={{ y }}
-            className="relative h-96 lg:h-[500px] flex items-center justify-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
           >
-            {/* Animated Liquid Background */}
-            <div className="absolute inset-0 overflow-hidden rounded-full">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"
-                animate={{
-                  background: [
-                    "radial-gradient(circle at 20% 50%, #000000 0%, #1a1a1a 25%, #000000 50%)",
-                    "radial-gradient(circle at 80% 20%, #000000 0%, #2a2a2a 25%, #000000 50%)",
-                    "radial-gradient(circle at 40% 80%, #000000 0%, #1a1a1a 25%, #000000 50%)",
-                    "radial-gradient(circle at 60% 30%, #000000 0%, #2a2a2a 25%, #000000 50%)",
-                    "radial-gradient(circle at 20% 50%, #000000 0%, #1a1a1a 25%, #000000 50%)"
-                  ]
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                style={{
-                  borderRadius: "50%",
-                  filter: "blur(1px)"
-                }}
-              />
-              
-              {/* Liquid Blob Effects */}
-              <motion.div
-                className="absolute w-32 h-32 bg-gradient-to-r from-gray-800 to-gray-700 rounded-full opacity-60"
-                animate={{
-                  x: ["-20px", "20px", "-20px"],
-                  y: ["-10px", "10px", "-10px"],
-                  scale: [1, 1.2, 1]
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                style={{
-                  top: "20%",
-                  left: "15%",
-                  filter: "blur(2px)"
-                }}
-              />
-              
-              <motion.div
-                className="absolute w-24 h-24 bg-gradient-to-r from-gray-700 to-gray-600 rounded-full opacity-50"
-                animate={{
-                  x: ["15px", "-15px", "15px"],
-                  y: ["10px", "-10px", "10px"],
-                  scale: [1.1, 0.9, 1.1]
-                }}
-                transition={{
-                  duration: 7,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-                style={{
-                  bottom: "25%",
-                  right: "20%",
-                  filter: "blur(1.5px)"
-                }}
-              />
-              
-              <motion.div
-                className="absolute w-20 h-20 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full opacity-40"
-                animate={{
-                  x: ["-10px", "25px", "-10px"],
-                  y: ["15px", "-5px", "15px"],
-                  scale: [0.8, 1.3, 0.8]
-                }}
-                transition={{
-                  duration: 9,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 2
-                }}
-                style={{
-                  top: "60%",
-                  left: "70%",
-                  filter: "blur(2.5px)"
-                }}
-              />
-            </div>
-
-            {/* Background Circle */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={isInView ? { scale: 1, opacity: 1 } : {}}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="relative w-80 h-80 bg-gradient-to-br from-[#6c5ce7]/10 to-[#fd79a8]/10 rounded-full flex items-center justify-center border border-[#6c5ce7]/20 z-10"
-            >
-              {/* Company Logo */}
-              <motion.img
-                src="https://assets.macaly-user-data.dev/kffp567qe9h57rg2vr1rolyc/rpcf7gb6yvup5eoym6i0lkst/VmeeKkdrXUNxDptLkJ4XO/logo-prestige-websites-removebg-preview.png"
-                alt="Prestige Websites Logo"
-                initial={{ scale: 0, rotate: -180 }}
-                animate={isInView ? { scale: 1, rotate: 0 } : {}}
-                transition={{ duration: 1, delay: 0.8, type: "spring", stiffness: 200 }}
-                className="w-32 h-32 object-contain"
-              />
-              
-              {/* Animated Ring */}
-              <motion.div
-                className="absolute inset-0 border-2 border-[#6c5ce7]/30 rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              
-              {/* Pulse Effect */}
-              <motion.div
-                className="absolute inset-0 border border-[#fd79a8]/40 rounded-full"
-                animate={{ 
-                  scale: [1, 1.1, 1],
-                  opacity: [0.3, 0.6, 0.3]
-                }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
-              />
-            </motion.div>
-            
-            {/* Floating Cards */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 1, duration: 0.8 }}
-              className="absolute top-10 -left-4 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-[#6c5ce7]/20"
-            >
-              <div className="text-2xl font-bold text-[#6c5ce7]">60+</div>
-              <div className="text-sm text-gray-600">Projects</div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 1.3, duration: 0.8 }}
-              className="absolute bottom-10 -right-4 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-[#fd79a8]/20"
-            >
-              <div className="text-2xl font-bold text-[#fd79a8]">40+</div>
-              <div className="text-sm text-gray-600">Countries</div>
-            </motion.div>
+            <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-6 hover:text-[#6c5ce7] transition-colors duration-300">
+              {textSections[0].title}
+            </h3>
+            <p className="text-lg text-[#555] leading-relaxed">
+              {textSections[0].content}
+            </p>
           </motion.div>
 
-          {/* Text Content */}
-          <div className="space-y-8">
-            {textSections.map((section, index) => (
+          {/* Why Choose Us - Two Column Layout with Image */}
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            {/* Text Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-6 hover:text-[#6c5ce7] transition-colors duration-300">
+                {textSections[1].title}
+              </h3>
+              <p className="text-lg text-[#555] leading-relaxed">
+                {textSections[1].content}
+              </p>
+            </motion.div>
+
+            {/* Logo Visual */}
+            <motion.div
+              style={{ y }}
+              className="lg:col-span-1 relative h-96 lg:h-[500px] flex items-center justify-center"
+            >
+              {/* Animated Liquid Background */}
+              <div className="absolute inset-0 overflow-hidden rounded-full">
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"
+                  animate={{
+                    background: [
+                      "radial-gradient(circle at 20% 50%, #000000 0%, #1a1a1a 25%, #000000 50%)",
+                      "radial-gradient(circle at 80% 20%, #000000 0%, #2a2a2a 25%, #000000 50%)",
+                      "radial-gradient(circle at 40% 80%, #000000 0%, #1a1a1a 25%, #000000 50%)",
+                      "radial-gradient(circle at 60% 30%, #000000 0%, #2a2a2a 25%, #000000 50%)",
+                      "radial-gradient(circle at 20% 50%, #000000 0%, #1a1a1a 25%, #000000 50%)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    borderRadius: "50%",
+                    filter: "blur(1px)"
+                  }}
+                />
+                
+                {/* Liquid Blob Effects */}
+                <motion.div
+                  className="absolute w-32 h-32 bg-gradient-to-r from-gray-800 to-gray-700 rounded-full opacity-60"
+                  animate={{
+                    x: ["-20px", "20px", "-20px"],
+                    y: ["-10px", "10px", "-10px"],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    top: "20%",
+                    left: "15%",
+                    filter: "blur(2px)"
+                  }}
+                />
+                
+                <motion.div
+                  className="absolute w-24 h-24 bg-gradient-to-r from-gray-700 to-gray-600 rounded-full opacity-50"
+                  animate={{
+                    x: ["15px", "-15px", "15px"],
+                    y: ["10px", "-10px", "10px"],
+                    scale: [1.1, 0.9, 1.1]
+                  }}
+                  transition={{
+                    duration: 7,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                  style={{
+                    bottom: "25%",
+                    right: "20%",
+                    filter: "blur(1.5px)"
+                  }}
+                />
+                
+                <motion.div
+                  className="absolute w-20 h-20 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full opacity-40"
+                  animate={{
+                    x: ["-10px", "25px", "-10px"],
+                    y: ["15px", "-5px", "15px"],
+                    scale: [0.8, 1.3, 0.8]
+                  }}
+                  transition={{
+                    duration: 9,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 2
+                  }}
+                  style={{
+                    top: "60%",
+                    left: "70%",
+                    filter: "blur(2.5px)"
+                  }}
+                />
+              </div>
+
+              {/* Background Circle */}
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.3 + index * 0.2, duration: 0.8 }}
-                className="group"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="relative w-80 h-80 bg-gradient-to-br from-[#6c5ce7]/10 to-[#fd79a8]/10 rounded-full flex items-center justify-center border border-[#6c5ce7]/20 z-10"
               >
-                <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-4 group-hover:text-[#6c5ce7] transition-colors duration-300">
-                  {section.title}
-                </h3>
-                <p className="text-lg text-[#555] leading-relaxed">
-                  {section.content}
-                </p>
+                {/* Company Logo */}
+                <motion.img
+                  src="https://assets.macaly-user-data.dev/kffp567qe9h57rg2vr1rolyc/rpcf7gb6yvup5eoym6i0lkst/VmeeKkdrXUNxDptLkJ4XO/logo-prestige-websites-removebg-preview.png"
+                  alt="Prestige Websites Logo"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={isInView ? { scale: 1, rotate: 0 } : {}}
+                  transition={{ duration: 1, delay: 0.8, type: "spring", stiffness: 200 }}
+                  className="w-32 h-32 object-contain"
+                />
+                
+                {/* Animated Ring */}
+                <motion.div
+                  className="absolute inset-0 border-2 border-[#6c5ce7]/30 rounded-full"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                />
+                
+                {/* Pulse Effect */}
+                <motion.div
+                  className="absolute inset-0 border border-[#fd79a8]/40 rounded-full"
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    opacity: [0.3, 0.6, 0.3]
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                />
               </motion.div>
-            ))}
+              
+              {/* Floating Cards */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 1, duration: 0.8 }}
+                className="absolute top-10 -left-4 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-[#6c5ce7]/20"
+              >
+                <div className="text-2xl font-bold text-[#6c5ce7]">60+</div>
+                <div className="text-sm text-gray-600">Projects</div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 1.3, duration: 0.8 }}
+                className="absolute bottom-10 -right-4 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-[#fd79a8]/20"
+              >
+                <div className="text-2xl font-bold text-[#fd79a8]">40+</div>
+                <div className="text-sm text-gray-600">Countries</div>
+              </motion.div>
+            </motion.div>
           </div>
+
+          {/* Strategic SEO Built for Growth - Full Width */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.7, duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-6 hover:text-[#6c5ce7] transition-colors duration-300">
+              {textSections[2].title}
+            </h3>
+            <p className="text-lg text-[#555] leading-relaxed">
+              {textSections[2].content}
+            </p>
+          </motion.div>
+
+          {/* What We Value - Full Width */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.9, duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-6 hover:text-[#6c5ce7] transition-colors duration-300">
+              {textSections[3].title}
+            </h3>
+            <p className="text-lg text-[#555] leading-relaxed">
+              {textSections[3].content}
+            </p>
+          </motion.div>
         </div>
 
         {/* Stats Section */}
@@ -306,7 +346,7 @@ const AboutSection = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto"
         >
           {/* Websites Launched */}
           <motion.div
@@ -371,3 +411,4 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
+
