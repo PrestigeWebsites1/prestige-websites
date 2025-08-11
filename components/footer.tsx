@@ -1,15 +1,15 @@
-
-
 "use client";
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function Footer() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  const { t } = useLanguage();
 
   const socialLinks = [
     { icon: "fab fa-instagram", href: "https://www.instagram.com/prestige_websites?igsh=MWtwdGR3aGg4ZmtkbQ%3D%3D&utm_source=qr", label: "Instagram" },
@@ -119,7 +119,7 @@ export default function Footer() {
             className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
-            Transforming digital landscapes with premium web design and strategic SEO solutions that drive real business growth.
+            {t('footer.description')}
           </motion.p>
         </motion.div>
 
@@ -175,7 +175,7 @@ export default function Footer() {
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            &copy; {new Date().getFullYear()} Prestige Websites. All rights reserved.
+            &copy; {new Date().getFullYear()} Prestige Websites. {t('footer.rights')}
           </motion.p>
         </motion.div>
 
@@ -222,4 +222,3 @@ export default function Footer() {
     </footer>
   );
 }
-

@@ -1,11 +1,16 @@
+
+
 "use client";
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/contexts/language-context';
+import LanguageSwitcher from './language-switcher';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +30,11 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Us' },
-    { id: 'portfolio', label: 'Portfolio' },
-    { id: 'testimonials', label: 'Testimonials' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'home', label: t('nav.home') },
+    { id: 'about', label: t('nav.about') },
+    { id: 'portfolio', label: t('nav.portfolio') },
+    { id: 'testimonials', label: t('nav.testimonials') },
+    { id: 'contact', label: t('nav.contact') }
   ];
 
   return (
@@ -77,31 +82,43 @@ const Navigation = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#fd79a8] transition-all duration-300 group-hover:w-full"></span>
             </motion.button>
           ))}
+          
+          {/* Language Switcher */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: navItems.length * 0.1 + 0.3 }}
+          >
+            <LanguageSwitcher isDark={isScrolled} />
+          </motion.div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={`lg:hidden p-2 transition-colors duration-300 ${
-            isScrolled ? 'text-white' : 'text-[#6c5ce7]'
-          }`}
-        >
-          <motion.div
-            animate={isMobileMenuOpen ? { rotate: 45 } : { rotate: 0 }}
-            transition={{ duration: 0.3 }}
+        {/* Mobile Menu Button and Language Switcher */}
+        <div className="lg:hidden flex items-center space-x-2">
+          <LanguageSwitcher isDark={isScrolled} />
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className={`p-2 transition-colors duration-300 ${
+              isScrolled ? 'text-white' : 'text-[#6c5ce7]'
+            }`}
           >
-            {isMobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </motion.div>
-        </motion.button>
+            <motion.div
+              animate={isMobileMenuOpen ? { rotate: 45 } : { rotate: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isMobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </motion.div>
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -138,3 +155,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

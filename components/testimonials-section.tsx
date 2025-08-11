@@ -1,8 +1,8 @@
-
 "use client";
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/contexts/language-context';
 
 // Animated Star Rating
 const AnimatedStarRating = ({ rating, delay = 0 }: { rating: number; delay?: number }) => {
@@ -147,8 +147,27 @@ const TestimonialsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { t } = useLanguage();
 
   const testimonials = [
+    {
+      name: t('testimonials.client1.name'),
+      position: t('testimonials.client1.role'),
+      rating: 5,
+      comment: t('testimonials.client1.content')
+    },
+    {
+      name: t('testimonials.client2.name'),
+      position: t('testimonials.client2.role'),
+      rating: 5,
+      comment: t('testimonials.client2.content')
+    },
+    {
+      name: t('testimonials.client3.name'),
+      position: t('testimonials.client3.role'),
+      rating: 5,
+      comment: t('testimonials.client3.content')
+    },
     {
       name: "Eleanor Vance",
       position: "CEO, TechStart Inc.",
@@ -166,30 +185,6 @@ const TestimonialsSection = () => {
       position: "Creative Director",
       rating: 5,
       comment: "The team is incredibly professional and attentive to every detail. They perfectly captured the essence of my brand and created something truly spectacular. Highly recommended!"
-    },
-    {
-      name: "Edward Blackwood",
-      position: "Business Owner",
-      rating: 5,
-      comment: "Impeccable service from start to finish. The design is modern, the navigation is intuitive, and the performance is outstanding. Our clients love the new website!"
-    },
-    {
-      name: "Thomas Beckett",
-      position: "E-commerce Manager",
-      rating: 5,
-      comment: "I am extremely happy with the final result. The site is lightning-fast, looks amazing on all devices, and our conversion rates have improved dramatically."
-    },
-    {
-      name: "Henry Sterling",
-      position: "Startup Founder",
-      rating: 5,
-      comment: "Prestige Websites completely transformed our online presence. Their SEO strategy is top-notch and their ongoing support has been invaluable to our success."
-    },
-    {
-      name: "Marjolaine Arizala",
-      position: "Business Owner",
-      rating: 5,
-      comment: "Lovely services! Should get more recognition."
     }
   ];
 
@@ -260,7 +255,7 @@ const TestimonialsSection = () => {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            Client <span className="bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] bg-clip-text text-transparent">Testimonials</span>
+            {t('testimonials.title')}
           </motion.h2>
           
           <motion.p
@@ -269,7 +264,7 @@ const TestimonialsSection = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-xl text-white/80 max-w-3xl mx-auto mb-8"
           >
-            Don't just take our word for it. Here's what our amazing clients have to say about their experience working with Prestige Websites.
+            {t('testimonials.subtitle')}
           </motion.p>
 
           <motion.div
@@ -392,3 +387,4 @@ const TestimonialsSection = () => {
 };
 
 export default TestimonialsSection;
+

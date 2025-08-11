@@ -1,7 +1,14 @@
 {
   "/": {
-    "title": "Prestige Websites | Premium Web Design & SEO Services",
-    "description": "Crafting digital masterpieces with professional web design and SEO services to elevate your online presence. Transform your business with stunning, conversion-focused websites.",
-    "ogImage": "/og-image-home.png"
+    "en": {
+      "title": "Prestige Websites | Premium Web Design & SEO Services",
+      "description": "Crafting digital masterpieces with professional web design and SEO services to elevate your online presence. Transform your business with stunning, conversion-focused websites.",
+      "ogImage": "/og-image-home.png"
+    },
+    "al": {
+      "title": "Prestige Websites | Dizajn Web Premium & Shërbime SEO",
+      "description": "Krijimi i kryeveprave dixhitale me dizajn web profesional dhe shërbime SEO për të ngritur prezencën tuaj online. Transformoni biznesin tuaj me uebsajte mahnitëse të fokusuara në konvertim.",
+      "ogImage": "/og-image-home.png"
+    }
   }
 }

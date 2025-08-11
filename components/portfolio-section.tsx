@@ -2,16 +2,20 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/contexts/language-context';
+import { TranslationKey } from '@/translations';
 
 // Portfolio Item Component
 const PortfolioItem = ({ 
   project, 
   index, 
-  isInView 
+  isInView,
+  t
 }: { 
   project: any; 
   index: number; 
   isInView: boolean;
+  t: (key: TranslationKey) => string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -78,7 +82,7 @@ const PortfolioItem = ({
             onClick={() => window.open(project.link, '_blank')}
             className="px-6 py-2 bg-white/20 backdrop-blur-md rounded-full text-white font-semibold hover:bg-white/30 transition-all duration-300"
           >
-            View Project →
+            {t('portfolio.viewProject')} →
           </motion.button>
         </motion.div>
       </div>
@@ -124,7 +128,7 @@ const PortfolioItem = ({
           className="w-full py-3 bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] text-white rounded-2xl font-semibold hover:shadow-lg transition-all duration-300 group-hover:shadow-2xl"
         >
           <span className="flex items-center justify-center gap-2">
-            Explore Project
+            {t('portfolio.exploreProject')}
             <motion.svg
               className="w-4 h-4"
               fill="none"
@@ -154,6 +158,7 @@ const PortfolioItem = ({
 const PortfolioSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   const portfolioData = [
     {
@@ -162,7 +167,7 @@ const PortfolioSection = () => {
       tags: ['Next.js', 'TailwindCSS', 'TypeScript', 'AI/ML'],
       link: 'https://neuralflowai.vercel.app/',
       image: 'https://assets.macaly-user-data.dev/kffp567qe9h57rg2vr1rolyc/rpcf7gb6yvup5eoym6i0lkst/8PiAj4CTk4Na-Gt40epYF/neuralflowai.png'
-    },
+    }
   ];
 
   return (
@@ -187,7 +192,7 @@ const PortfolioSection = () => {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            Our <span className="bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] bg-clip-text text-transparent">Work</span>
+            {t('portfolio.title')}
           </motion.h2>
           
           <motion.p
@@ -196,7 +201,7 @@ const PortfolioSection = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-xl text-[#777] max-w-3xl mx-auto mb-8"
           >
-            Discover our portfolio of stunning websites and digital experiences that have transformed businesses and captivated audiences worldwide.
+            {t('portfolio.subtitle')}
           </motion.p>
 
           <motion.div
@@ -215,6 +220,7 @@ const PortfolioSection = () => {
               project={project}
               index={index}
               isInView={isInView}
+              t={t}
             />
           ))}
         </div>
@@ -240,7 +246,7 @@ const PortfolioSection = () => {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#fd79a8] to-[#6c5ce7] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
               <span className="relative z-10 flex items-center gap-3">
-                Start Your Project
+                {t('portfolio.startProject')}
                 <motion.svg
                   className="w-5 h-5"
                   fill="none"

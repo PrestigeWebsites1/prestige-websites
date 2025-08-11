@@ -2,14 +2,11 @@
 
 
 
-
-
-
-
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLanguage } from '@/contexts/language-context';
 
 // Typewriter Effect Component
 const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
@@ -261,6 +258,7 @@ const HeroSection = () => {
     target: containerRef,
     offset: ["start start", "end start"]
   });
+  const { t } = useLanguage();
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
@@ -303,24 +301,15 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 3 }}
           >
-            Crafting Digital{' '}
-            <span className="bg-gradient-to-r from-[#a29bfe] via-[#fd79a8] to-[#6c5ce7] bg-clip-text text-transparent">
-              <motion.span
-                animate={{ 
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                style={{
-                  backgroundSize: "200% 200%"
-                }}
-              >
-                Masterpieces
-              </motion.span>
-            </span>
+            <span>{t('hero.title').split(' ').slice(0, -1).join(' ')} </span>
+            <motion.span
+              className="bg-gradient-to-r from-[#ff6b9d] via-[#ffd93d] to-[#a8e6cf] bg-clip-text text-transparent bg-size-200 animate-gradient-x"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 2, delay: 4 }}
+            >
+              {t('hero.title').split(' ').slice(-1)[0]}
+            </motion.span>
           </motion.h1>
 
           {/* Subtitle with typewriter effect */}
@@ -331,7 +320,7 @@ const HeroSection = () => {
             className="text-xl md:text-2xl lg:text-3xl font-light mb-8"
           >
             <TypewriterText 
-              text="Web Design & SEO That Elevates Your Brand" 
+              text={t('hero.subtitle')} 
               delay={5500}
             />
           </motion.div>
@@ -356,7 +345,7 @@ const HeroSection = () => {
                 whileHover={{ scale: 1 }}
               />
               <span className="relative z-10 flex items-center gap-3">
-                Start Your Project
+                {t('hero.cta')}
                 <motion.svg
                   className="w-5 h-5"
                   fill="none"

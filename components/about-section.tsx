@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { useLanguage } from '@/contexts/language-context';
 
 // Counter Animation Component
 const AnimatedCounter = ({ end, duration = 2000, suffix = "" }: { end: number; duration?: number; suffix?: string }) => {
@@ -71,27 +72,9 @@ const AboutSection = () => {
     target: containerRef,
     offset: ["start end", "end start"]
   });
+  const { t } = useLanguage();
 
   const y = useTransform(scrollYProgress, [0, 1], ["100px", "-100px"]);
-
-  const textSections = [
-    {
-      title: "Who We Are",
-      content: "We are a boutique web design and development agency focused on creating high-impact digital experiences. At Prestige Websites, every website is thoughtfully built to match your brand, connect with your audience, and drive long-term growth.Our clients range from ambitious startups to established businesses that understand how powerful a strong online presence can be when done right."
-    },
-    {
-      title: "Why Choose Us",
-      content: "We combine sharp design, smart strategy, and performance-first development to create websites that don’t just look great — they deliver measurable results. Our process is detail- driven and intentional, with every decision based on your business goals, your users, and how to turn attention into action.From the structure and layout to the tiniest animations, everything is crafted with purpose. We go beyond launch — continuously optimizing your site, improving performance, enhancing user experience, and adapting to your growth so your website keeps delivering long after it’s live. This isn’t just web design.It’s a long - term digital asset built to grow your business."
-    },
-    {
-      title: "Strategic SEO Built for Growth",
-      content: "Having a great website means nothing if no one sees it. That’s why SEO isn’t an add-on in our process — it’s built into the foundation of every project we take on. Search Engine Optimization(SEO) is what helps your website rank higher on Google and other search engines when potential customers search for the products or services you offer.Without it, your site is just another invisible page on the internet.With it, your business becomes discoverable, trusted, and chosen. We go far beyond basic keyword stuffing.Our SEO approach is data- driven, strategic, and constantly evolving.We have specialists who track, analyze, and refine your SEO performance every single month — monitoring traffic patterns, studying user behavior, reviewing ranking positions, and adjusting content and structure based on real results. This means your site doesn’t just launch optimized — it stays optimized."
-    },
-    {
-      title: "What We Value",
-      content: "We value transparency in every step of the process — from open communication and clear timelines to honest feedback and accountability. We prioritize performance by building fast, responsive, and conversion-focused websites backed by data and real-world results. Collaboration is at the core of how we work; your vision and goals guide every decision we make. And above all, we value quality — no shortcuts, no compromises, just work we’re proud to stand behind."
-    }
-  ];
 
   return (
     <section id="about" ref={containerRef} className="relative py-20 lg:py-32 bg-white overflow-hidden">
@@ -115,7 +98,7 @@ const AboutSection = () => {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            About <span className="bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] bg-clip-text text-transparent">Us</span>
+            {t('about.title')}
           </motion.h2>
           <motion.div
             initial={{ width: 0 }}
@@ -135,10 +118,10 @@ const AboutSection = () => {
             className="max-w-4xl mx-auto text-center"
           >
             <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-6 hover:text-[#6c5ce7] transition-colors duration-300">
-              {textSections[0].title}
+              {t('about.whoWeAre.title')}
             </h3>
             <p className="text-lg text-[#555] leading-relaxed">
-              {textSections[0].content}
+              {t('about.whoWeAre.content')}
             </p>
           </motion.div>
 
@@ -151,10 +134,10 @@ const AboutSection = () => {
               transition={{ delay: 0.5, duration: 0.8 }}
             >
               <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-6 hover:text-[#6c5ce7] transition-colors duration-300">
-                {textSections[1].title}
+                {t('about.whyChoose.title')}
               </h3>
               <p className="text-lg text-[#555] leading-relaxed">
-                {textSections[1].content}
+                {t('about.whyChoose.content')}
               </p>
             </motion.div>
 
@@ -295,7 +278,7 @@ const AboutSection = () => {
                 className="absolute top-10 -left-4 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-[#6c5ce7]/20"
               >
                 <div className="text-2xl font-bold text-[#6c5ce7]">60+</div>
-                <div className="text-sm text-gray-600">Projects</div>
+                <div className="text-sm text-gray-600">{t('about.stats.projects')}</div>
               </motion.div>
               
               <motion.div
@@ -318,10 +301,10 @@ const AboutSection = () => {
             className="max-w-4xl mx-auto text-center"
           >
             <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-6 hover:text-[#6c5ce7] transition-colors duration-300">
-              {textSections[2].title}
+              {t('about.strategic.title')}
             </h3>
             <p className="text-lg text-[#555] leading-relaxed">
-              {textSections[2].content}
+              {t('about.strategic.content')}
             </p>
           </motion.div>
 
@@ -333,10 +316,10 @@ const AboutSection = () => {
             className="max-w-4xl mx-auto text-center"
           >
             <h3 className="text-2xl md:text-3xl font-bold text-[#2d3436] mb-6 hover:text-[#6c5ce7] transition-colors duration-300">
-              {textSections[3].title}
+              {t('about.values.title')}
             </h3>
             <p className="text-lg text-[#555] leading-relaxed">
-              {textSections[3].content}
+              {t('about.values.content')}
             </p>
           </motion.div>
         </div>
@@ -364,7 +347,7 @@ const AboutSection = () => {
               </svg>
             </motion.div>
             <AnimatedCounter end={60} suffix="+" />
-            <div className="text-lg text-[#777] font-medium mt-2">Websites Launched</div>
+            <div className="text-lg text-[#777] font-medium mt-2">{t('about.stats.projects')}</div>
           </motion.div>
 
           {/* Client Rating */}
@@ -383,7 +366,7 @@ const AboutSection = () => {
               </svg>
             </motion.div>
             <StarRating rating={5} />
-            <div className="text-lg text-[#777] font-medium mt-2">Client Rating</div>
+            <div className="text-lg text-[#777] font-medium mt-2">{t('about.stats.clients')}</div>
           </motion.div>
 
           {/* Countries */}
@@ -411,4 +394,3 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
-

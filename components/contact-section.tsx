@@ -1,8 +1,8 @@
-
 "use client";
 
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useLanguage } from '@/contexts/language-context';
 
 // Contact Item Component
 const ContactItem = ({ 
@@ -136,6 +136,7 @@ const ContactItem = ({
 const ContactSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   const contactItems = [
     {
@@ -212,7 +213,7 @@ const ContactSection = () => {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            Get In <span className="bg-gradient-to-r from-[#6c5ce7] to-[#fd79a8] bg-clip-text text-transparent">Touch</span>
+            {t('contact.title')}
           </motion.h2>
           
           <motion.p
@@ -221,7 +222,7 @@ const ContactSection = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-xl text-white/80 max-w-3xl mx-auto mb-8"
           >
-            Ready to elevate your digital presence? Contact us today for a free consultation and let's create something extraordinary together.
+            {t('contact.subtitle')}
           </motion.p>
 
           <motion.div
@@ -265,7 +266,7 @@ const ContactSection = () => {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#fd79a8] to-[#6c5ce7] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
               <span className="relative z-10 flex items-center gap-3">
-                Start Your Project Today
+                {t('hero.cta')}
                 <motion.svg
                   className="w-5 h-5"
                   fill="none"

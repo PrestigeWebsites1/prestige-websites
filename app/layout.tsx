@@ -17,7 +17,7 @@ const playfair = Playfair_Display({
   weight: ["400", "700"]
 })
 
-export const metadata: Metadata = siteMetadata['/']
+export const metadata: Metadata = siteMetadata['/'].en
 
 export default function RootLayout({
   children,
