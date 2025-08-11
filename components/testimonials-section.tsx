@@ -184,6 +184,12 @@ const TestimonialsSection = () => {
       position: "Startup Founder",
       rating: 5,
       comment: "Prestige Websites completely transformed our online presence. Their SEO strategy is top-notch and their ongoing support has been invaluable to our success."
+    },
+    {
+      name: "Marjolaine Arizala",
+      position: "Business Owner",
+      rating: 5,
+      comment: "Lovely services! Should get more recognition."
     }
   ];
 
