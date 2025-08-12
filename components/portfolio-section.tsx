@@ -167,6 +167,36 @@ const PortfolioSection = () => {
       tags: ['Next.js', 'TailwindCSS', 'TypeScript', 'AI/ML'],
       link: 'https://neuralflowai.vercel.app/',
       image: 'https://assets.macaly-user-data.dev/kffp567qe9h57rg2vr1rolyc/rpcf7gb6yvup5eoym6i0lkst/8PiAj4CTk4Na-Gt40epYF/neuralflowai.png'
+    },
+    {
+      title: 'E-Commerce Excellence',
+      description: 'Modern e-commerce platform with seamless user experience, advanced filtering, and secure payment integration. Optimized for conversions and mobile responsiveness.',
+      tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      link: '#'
+    },
+    {
+      title: 'Creative Portfolio',
+      description: 'Stunning portfolio website for creative professionals featuring interactive galleries, smooth animations, and responsive design across all devices.',
+      tags: ['Vue.js', 'GSAP', 'CSS3', 'WebGL'],
+      link: '#'
+    },
+    {
+      title: 'SaaS Dashboard',
+      description: 'Comprehensive SaaS dashboard with real-time analytics, user management, and advanced data visualization. Built for scalability and performance.',
+      tags: ['React', 'D3.js', 'Firebase', 'Material-UI'],
+      link: '#'
+    },
+    {
+      title: 'Restaurant Chain',
+      description: 'Multi-location restaurant website with online ordering, reservation system, and dynamic menu management. Optimized for local SEO.',
+      tags: ['WordPress', 'PHP', 'MySQL', 'SEO'],
+      link: '#'
+    },
+    {
+      title: 'Tech Startup',
+      description: 'Modern startup landing page with interactive elements, conversion optimization, and comprehensive analytics integration for growth tracking.',
+      tags: ['Gatsby', 'GraphQL', 'Netlify', 'Analytics'],
+      link: '#'
     }
   ];
 

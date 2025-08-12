@@ -1,7 +1,5 @@
 
 
-
-
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
@@ -301,15 +299,53 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 3 }}
           >
-            <span>{t('hero.title').split(' ').slice(0, -1).join(' ')} </span>
-            <motion.span
-              className="bg-gradient-to-r from-[#ff6b9d] via-[#ffd93d] to-[#a8e6cf] bg-clip-text text-transparent bg-size-200 animate-gradient-x"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 2, delay: 4 }}
-            >
-              {t('hero.title').split(' ').slice(-1)[0]}
-            </motion.span>
+            {(() => {
+              const { language } = useLanguage();
+              const words = t('hero.title').split(' ');
+              
+              if (language === 'al') {
+                // For Albanian, apply gradient to both "kryeveprave" and the last word
+                return words.map((word, index) => {
+                  const isKryeveprave = word.toLowerCase() === 'kryeveprave';
+                  const isLastWord = index === words.length - 1;
+                  
+                  if (isKryeveprave || isLastWord) {
+                    return (
+                      <motion.span
+                        key={index}
+                        className="bg-gradient-to-r from-[#ff6b9d] via-[#ffd93d] to-[#a8e6cf] bg-clip-text text-transparent bg-size-200 animate-gradient-x"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 2, delay: 4 }}
+                      >
+                        {word}{index < words.length - 1 ? ' ' : ''}
+                      </motion.span>
+                    );
+                  }
+                  
+                  return (
+                    <span key={index}>
+                      {word}{index < words.length - 1 ? ' ' : ''}
+                    </span>
+                  );
+                });
+              } else {
+                // For other languages, apply gradient only to the last word
+                return (
+                  <>
+                    <span>{words.slice(0, -1).join(' ')} </span>
+                    <motion.span
+                      className="bg-gradient-to-r from-[#ff6b9d] via-[#ffd93d] to-[#a8e6cf] bg-clip-text text-transparent bg-size-200 animate-gradient-x"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, delay: 4 }}
+                    >
+                      {words.slice(-1)[0]}
+                    </motion.span>
+                  </>
+                );
+              }
+            })()}
           </motion.h1>
 
           {/* Subtitle with typewriter effect */}
@@ -368,9 +404,18 @@ const HeroSection = () => {
             className="flex flex-wrap justify-center gap-8 mt-16"
           >
             {[
-              { number: "60+", label: "Websites Launched" },
-              { number: "5★", label: "Client Rating" },
-              { number: "40+", label: "Countries" }
+              { number: "60+", label: (() => {
+                const { language } = useLanguage();
+                return language === 'al' ? 'Website të Krijuara' : 'Websites Launched';
+              })() },
+              { number: "5★", label: (() => {
+                const { language } = useLanguage();
+                return language === 'al' ? 'Vlerësimi i Klientit' : 'Client Rating';
+              })() },
+              { number: "40+", label: (() => {
+                const { language } = useLanguage();
+                return language === 'al' ? 'Shtete' : 'Countries';
+              })() }
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -412,3 +457,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+

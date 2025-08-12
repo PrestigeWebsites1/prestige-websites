@@ -278,7 +278,10 @@ const AboutSection = () => {
                 className="absolute top-10 -left-4 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-[#6c5ce7]/20"
               >
                 <div className="text-2xl font-bold text-[#6c5ce7]">60+</div>
-                <div className="text-sm text-gray-600">{t('about.stats.projects')}</div>
+                <div className="text-sm text-gray-600">{(() => {
+                  const { language } = useLanguage();
+                  return language === 'al' ? 'Website të Krijuara' : 'Websites Launched';
+                })()}</div>
               </motion.div>
               
               <motion.div
@@ -288,7 +291,10 @@ const AboutSection = () => {
                 className="absolute bottom-10 -right-4 bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-[#fd79a8]/20"
               >
                 <div className="text-2xl font-bold text-[#fd79a8]">40+</div>
-                <div className="text-sm text-gray-600">Countries</div>
+                <div className="text-sm text-gray-600">{(() => {
+                  const { language } = useLanguage();
+                  return language === 'al' ? 'Shtete' : 'Countries';
+                })()}</div>
               </motion.div>
             </motion.div>
           </div>
@@ -347,7 +353,10 @@ const AboutSection = () => {
               </svg>
             </motion.div>
             <AnimatedCounter end={60} suffix="+" />
-            <div className="text-lg text-[#777] font-medium mt-2">{t('about.stats.projects')}</div>
+            <div className="text-lg text-[#777] font-medium mt-2">{(() => {
+              const { language } = useLanguage();
+              return language === 'al' ? 'Website të Krijuara' : 'Websites Launched';
+            })()}</div>
           </motion.div>
 
           {/* Client Rating */}
@@ -385,7 +394,10 @@ const AboutSection = () => {
               </svg>
             </motion.div>
             <AnimatedCounter end={40} suffix="+" />
-            <div className="text-lg text-[#777] font-medium mt-2">Countries</div>
+            <div className="text-lg text-[#777] font-medium mt-2">{(() => {
+              const { language } = useLanguage();
+              return language === 'al' ? 'Shtete' : 'Countries';
+            })()}</div>
           </motion.div>
         </motion.div>
       </div>
@@ -394,3 +406,4 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
+
