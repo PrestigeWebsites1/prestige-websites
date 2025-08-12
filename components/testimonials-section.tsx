@@ -167,24 +167,6 @@ const TestimonialsSection = () => {
       position: t('testimonials.client3.role'),
       rating: 5,
       comment: t('testimonials.client3.content')
-    },
-    {
-      name: "Eleanor Vance",
-      position: "CEO, TechStart Inc.",
-      rating: 5,
-      comment: "Absolutely impressed with the design and functionality! My website exceeded my expectations and has significantly boosted my business growth. The attention to detail is remarkable."
-    },
-    {
-      name: "Arthur Finch",
-      position: "Marketing Director",
-      rating: 5,
-      comment: "Excellent SEO work that delivered real results. We've seen a 300% increase in organic traffic since Prestige Websites optimized our site. Their expertise is unmatched."
-    },
-    {
-      name: "Victoria Sinclair",
-      position: "Creative Director",
-      rating: 5,
-      comment: "The team is incredibly professional and attentive to every detail. They perfectly captured the essence of my brand and created something truly spectacular. Highly recommended!"
     }
   ];
 
