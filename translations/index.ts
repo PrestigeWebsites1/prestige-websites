@@ -94,7 +94,7 @@ export const translations = {
 
     // Hero Section
     'hero.title': 'Krijimi i Kryeveprave Dixhitale',
-    'hero.subtitle': 'Dizajn Web & SEO që Ngrit Markën Tuaj',
+    'hero.subtitle': 'Web Design & SEO Që Rrit Biznesin Tuaj',
     'hero.cta': 'Fillo Projektin Tënd',
     'hero.learnMore': 'Mëso Më Shumë',
 
